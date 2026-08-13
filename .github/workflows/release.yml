@@ -1,0 +1,100 @@
+name: Build, attest, scan, and promote
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/containersecurity-dev/sip
+  TRIVY_VERSION: 0.72.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.22.1
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Build application
+        run: npm run build
+
+      - name: Log in to Docker Hardened Images
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: dhi.io
+          username: ${{ secrets.DHI_USERNAME }}
+          password: ${{ secrets.DHI_PASSWORD }}
+
+      - name: Log in to GHCR
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      - name: Build and push candidate with attestations
+        id: build
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          sbom: true
+          provenance: mode=max
+          outputs: type=image,name=${{ env.IMAGE }}:sha-${{ github.sha }},push=true,oci-mediatypes=true,oci-artifact=true
+
+      - name: Install pinned Trivy
+        uses: aquasecurity/setup-trivy@81e514348e19b6112ce2a7e3ecbafe19c1e1f567 # v0.3.1
+        with:
+          version: v${{ env.TRIVY_VERSION }}
+          cache: true
+
+      - name: Gate candidate using attached OCI SBOM
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          test -n "$DIGEST"
+          trivy image \
+            --sbom-sources oci \
+            --scanners vuln \
+            --severity CRITICAL \
+            --ignore-unfixed \
+            --exit-code 1 \
+            "${IMAGE}@${DIGEST}"
+
+      - name: Select promotion tag
+        id: promotion
+        env:
+          REF_NAME: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+        run: |
+          if [ "$REF_TYPE" = tag ]; then
+            echo "tag=$REF_NAME" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Promote the scanned digest
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+          PROMOTION_TAG: ${{ steps.promotion.outputs.tag }}
+        run: |
+          docker buildx imagetools create \
+            --tag "${IMAGE}:${PROMOTION_TAG}" \
+            "${IMAGE}@${DIGEST}"
