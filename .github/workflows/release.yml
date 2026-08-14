@@ -16,13 +16,14 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  IMAGE: ghcr.io/containersecurity-dev/sip
   TRIVY_VERSION: 0.72.0
 
 jobs:
   dependencies:
     name: SIP ii - dependencies
     runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.image.outputs.name }}
     steps:
       - name: Reject ineligible release refs
         if: github.event_name == 'workflow_dispatch'
@@ -42,16 +43,22 @@ jobs:
       - name: Check out source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
+      - name: Normalize candidate image name
+        id: image
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: echo "name=ghcr.io/${REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22.22.1
+          node-version: 26.3.0
           cache: npm
 
       - name: Validate dependencies and build
         run: |
           node scripts/validate-lockfile-age.mjs
-          npm exec --yes --package=npm@11.10.0 -- npm ci --ignore-scripts
+          npm ci --ignore-scripts
           npm run build
           npm test
 
@@ -62,13 +69,16 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository
     needs: dependencies
     runs-on: ubuntu-latest
+    environment: sip-publish
     permissions:
       contents: read
       packages: write
     outputs:
       digest: ${{ steps.build.outputs.digest }}
+      image: ${{ needs.dependencies.outputs.image }}
     env:
       CANDIDATE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      IMAGE: ${{ needs.dependencies.outputs.image }}
     steps:
       - name: Check out candidate source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -123,6 +133,7 @@ jobs:
       pull-requests: write
     env:
       DIGEST: ${{ needs.container-attestations.outputs.digest }}
+      IMAGE: ${{ needs.container-attestations.outputs.image }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -192,6 +203,7 @@ jobs:
           jq -n --rawfile body comment.md '{body: $body}' > comment.json
           COMMENT_ID=$(gh api \
             "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
+            --paginate \
             --jq '.[] | select(.body | contains("<!-- sip-trivy-report -->")) | .id' \
             | head -n 1)
           if [ -n "$COMMENT_ID" ]; then
@@ -221,6 +233,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DIGEST: ${{ needs.container-attestations.outputs.digest }}
+      IMAGE: ${{ needs.container-attestations.outputs.image }}
     steps:
       - name: Log in to GHCR
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3

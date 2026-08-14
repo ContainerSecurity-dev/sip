@@ -1,20 +1,18 @@
 # syntax=docker/dockerfile:1
 
-FROM dhi.io/node:22-debian12-dev AS build
+FROM dhi.io/node:26.3.0-debian13-dev AS build
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 WORKDIR /app
 
 COPY package.json package-lock.json .npmrc ./
-COPY scripts/validate-lockfile-age.mjs ./scripts/validate-lockfile-age.mjs
-RUN node scripts/validate-lockfile-age.mjs \
-    && npm exec --yes --package=npm@11.10.0 -- npm ci --ignore-scripts
+RUN npm ci --ignore-scripts
 
 COPY tsconfig.json ./
 COPY src ./src
 RUN npm run build \
     && npm prune --omit=dev --ignore-scripts
 
-FROM dhi.io/node:22-debian12 AS runtime
+FROM dhi.io/node:26.3.0-debian13 AS runtime
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 ENV NODE_ENV=production
 WORKDIR /app

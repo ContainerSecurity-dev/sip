@@ -28,6 +28,13 @@ SIP v Critical-CVE gate. The gate scans the attached SBOM from the immutable
 digest and creates or updates a PR comment with its findings. Fork pull requests
 never receive DHI or registry credentials.
 
+The credential-bearing container job uses the `sip-publish` GitHub environment.
+Configure that environment with required reviewers before adding `DHI_USERNAME`
+and `DHI_PASSWORD`, so PR-controlled workflow changes cannot access publishing
+credentials without explicit approval. Fork PRs receive the dependency job only;
+after merge, the trusted `main` workflow must pass the complete SIP ii–v chain
+before it can promote an image.
+
 The release workflow builds from Docker Hardened Images, publishes a commit-SHA
 candidate with BuildKit SBOM and maximum provenance attestations, and scans the
 candidate by digest after explicitly retrieving its attached OCI SBOM. A successful Critical
