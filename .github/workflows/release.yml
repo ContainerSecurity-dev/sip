@@ -134,7 +134,7 @@ jobs:
           test -n "$DIGEST"
           docker buildx imagetools inspect \
             "${IMAGE}@${DIGEST}" \
-            --format '{{ json .SBOM }}' > sbom.spdx.json
+            --format '{{ json .SBOM.SPDX }}' > sbom.spdx.json
           jq -e \
             '.spdxVersion and (.packages | type == "array") and (.packages | length > 0)' \
             sbom.spdx.json > /dev/null
@@ -266,7 +266,7 @@ jobs:
           test -n "$DIGEST"
           docker buildx imagetools inspect \
             "${IMAGE}@${DIGEST}" \
-            --format '{{ json .SBOM }}' > sbom.spdx.json
+            --format '{{ json .SBOM.SPDX }}' > sbom.spdx.json
           jq -e \
             '.spdxVersion and (.packages | type == "array") and (.packages | length > 0)' \
             sbom.spdx.json > /dev/null
