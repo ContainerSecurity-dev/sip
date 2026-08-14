@@ -95,3 +95,6 @@ the reviews; together they define four actionable remediation clusters.
 - Reject workflow runs unless the ref is the `main` branch or a `v*` tag.
 - Add ref-scoped concurrency with in-progress cancellation so a superseded main
   run cannot promote after its replacement.
+- Trigger CI for pull requests targeting `main`, validating the dependency
+  cooldown, locked install, application build, and tests without exposing
+  registry credentials or publishing an image from the PR event.

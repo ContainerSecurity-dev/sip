@@ -1,6 +1,8 @@
 name: Build, attest, scan, and promote
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
     tags: ['v*']
@@ -19,7 +21,29 @@ env:
   TRIVY_VERSION: 0.72.0
 
 jobs:
+  ci:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.22.1
+          cache: npm
+
+      - name: Validate dependencies and build
+        run: |
+          npm install --global npm@11.10.0 --ignore-scripts
+          node scripts/validate-lockfile-age.mjs
+          npm ci --ignore-scripts
+          npm run build
+          npm test
+
   release:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Reject ineligible release refs
