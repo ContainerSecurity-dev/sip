@@ -98,6 +98,5 @@ the reviews; together they define four actionable remediation clusters.
 - Trigger CI for pull requests targeting `main`. Fork PRs validate dependencies,
   build the application, and run tests without registry credentials. Trusted
   same-repository PRs may continue through the credential-bearing container and
-  vulnerability jobs. The repository plan does not support required environment
-  reviewers, so these PRs must remain restricted to trusted contributors; their
-  candidate image is never promoted to a release tag.
+  vulnerability jobs only after approval through the protected `sip-publish`
+  environment; their candidate image is never promoted to a release tag.

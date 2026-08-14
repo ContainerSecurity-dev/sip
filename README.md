@@ -219,10 +219,9 @@ image can be promoted.
 
 The publishing job uses the `sip-publish` GitHub environment. Protect it with a
 required reviewer so changes to the workflow or Dockerfile cannot access
-publishing credentials without approval. This repository's current private-repo
-plan does not support required environment reviewers, so same-repository PRs
-remain trusted contributors only; fork PRs are excluded from the publishing job
-entirely.
+publishing credentials without approval. This sample configures `aerabi` as the
+required reviewer. Same-repository PRs pause before the credential-bearing job;
+fork PRs are excluded from the publishing job entirely.
 
 All jobs check out the same candidate SHA: the pull request head SHA for PR
 events and `github.sha` for trusted push or manual events. Dependency tests,
