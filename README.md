@@ -22,7 +22,7 @@ npm start
 
 The release workflow builds from Docker Hardened Images, publishes a commit-SHA
 candidate with BuildKit SBOM and maximum provenance attestations, and scans the
-candidate by digest using only its attached OCI SBOM. A successful Critical
+candidate by digest after explicitly retrieving its attached OCI SBOM. A successful Critical
 vulnerability gate promotes that same digest to `latest` (main) or the release
 tag (`v*`); it is never rebuilt between scanning and promotion.
 

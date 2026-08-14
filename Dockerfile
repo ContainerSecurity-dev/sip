@@ -5,7 +5,10 @@ ARG BUILDKIT_SBOM_SCAN_STAGE=true
 WORKDIR /app
 
 COPY package.json package-lock.json .npmrc ./
-RUN npm ci --ignore-scripts
+COPY scripts/validate-lockfile-age.mjs ./scripts/validate-lockfile-age.mjs
+RUN npm install --global npm@11.10.0 --ignore-scripts \
+    && node scripts/validate-lockfile-age.mjs \
+    && npm ci --ignore-scripts
 
 COPY tsconfig.json ./
 COPY src ./src
