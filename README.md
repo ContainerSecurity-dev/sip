@@ -32,7 +32,9 @@ The release workflow builds from Docker Hardened Images, publishes a commit-SHA
 candidate with BuildKit SBOM and maximum provenance attestations, and scans the
 candidate by digest after explicitly retrieving its attached OCI SBOM. A successful Critical
 vulnerability gate promotes that same digest to `latest` (main) or the release
-tag (`v*`); it is never rebuilt between scanning and promotion.
+tag (`v*`); the release path reuses the same SIP ii–v jobs as pull requests and
+only the final promotion is release-specific, so the image is never rebuilt
+between scanning and promotion.
 
 Configure the `DHI_USERNAME` and `DHI_PASSWORD` repository secrets for access to
 `dhi.io`. GitHub's `GITHUB_TOKEN` publishes to
