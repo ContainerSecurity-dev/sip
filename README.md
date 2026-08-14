@@ -21,9 +21,12 @@ npm start
 ## Supply-chain release
 
 Pull requests targeting `main` validate the locked dependency set, application
-build, and tests. Same-repository pull requests also build the Docker Hardened
-Image and publish a head-commit candidate with SBOM and maximum provenance
-attestations; fork pull requests never receive DHI or registry credentials.
+build, and tests in a dedicated SIP ii job. Same-repository pull requests then
+run a combined SIP iii–iv job that builds the Docker Hardened Image once and
+publishes its SBOM and maximum-provenance attestations, followed by a separate
+SIP v Critical-CVE gate. The gate scans the attached SBOM from the immutable
+digest and creates or updates a PR comment with its findings. Fork pull requests
+never receive DHI or registry credentials.
 
 The release workflow builds from Docker Hardened Images, publishes a commit-SHA
 candidate with BuildKit SBOM and maximum provenance attestations, and scans the
