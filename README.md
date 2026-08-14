@@ -87,16 +87,23 @@ lockfile.
 There is an important lockfile nuance: `npm ci` installs already-locked versions
 without resolving new candidates, so `min-release-age` alone does not reject a
 recent version that is already present in `package-lock.json`. SIP ii therefore
-runs the lockfile-age validator before installation. It queries npm publication
-metadata in bounded batches and fails closed when a locked version:
+runs the lockfile-age validator before installation. It requires lockfile
+version 2 or newer with a non-empty `packages` table, then queries npm
+publication metadata in bounded batches. A locked version fails when it:
 
 - is younger than five days;
-- has no verifiable publication timestamp; or
+- has a missing or invalid publication timestamp;
+- has a tarball URL or integrity value that differs from npm registry metadata;
+  or
 - cannot be checked because registry metadata is unavailable.
 
 No cooldown exclusions are configured. If a required security update is less
 than five days old, review it and add a narrowly scoped
 `min-release-age-exclude` entry rather than weakening the policy globally.
+The validator honors exact package names from repeated or comma-separated
+`min-release-age-exclude` entries in `.npmrc`. An exclusion bypasses both age
+and artifact-metadata checks, so review it as carefully as the dependency
+update itself.
 
 Run the same check locally with:
 
@@ -210,9 +217,17 @@ publishing credentials, so they stop after dependency/application validation.
 After a fork PR is merged, the trusted `main` run must pass SIP ii–v before any
 image can be promoted.
 
-The publishing job uses the `sip-publish` GitHub environment. In production,
-protect this environment with required reviewers so changes to the workflow or
-Dockerfile cannot access publishing credentials without approval.
+The publishing job uses the `sip-publish` GitHub environment. Protect it with a
+required reviewer so changes to the workflow or Dockerfile cannot access
+publishing credentials without approval. This repository's current private-repo
+plan does not support required environment reviewers, so same-repository PRs
+remain trusted contributors only; fork PRs are excluded from the publishing job
+entirely.
+
+All jobs check out the same candidate SHA: the pull request head SHA for PR
+events and `github.sha` for trusted push or manual events. Dependency tests,
+container construction, attestations, and scanning therefore evaluate one
+identical source revision.
 
 ### Main, tags, and manual releases
 

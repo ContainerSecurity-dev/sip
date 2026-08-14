@@ -95,6 +95,9 @@ the reviews; together they define four actionable remediation clusters.
 - Reject workflow runs unless the ref is the `main` branch or a `v*` tag.
 - Add ref-scoped concurrency with in-progress cancellation so a superseded main
   run cannot promote after its replacement.
-- Trigger CI for pull requests targeting `main`, validating the dependency
-  cooldown, locked install, application build, and tests without exposing
-  registry credentials or publishing an image from the PR event.
+- Trigger CI for pull requests targeting `main`. Fork PRs validate dependencies,
+  build the application, and run tests without registry credentials. Trusted
+  same-repository PRs may continue through the credential-bearing container and
+  vulnerability jobs. The repository plan does not support required environment
+  reviewers, so these PRs must remain restricted to trusted contributors; their
+  candidate image is never promoted to a release tag.
