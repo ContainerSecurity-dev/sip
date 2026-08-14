@@ -25,6 +25,10 @@ there is no rebuild between scanning and promotion.
 | iv. Generate attestations | BuildKit settings in [`.github/workflows/release.yml`](.github/workflows/release.yml) |
 | v. Scan the attested SBOM | Pinned Trivy, explicit SPDX extraction, PR reporting, and digest promotion in the workflow |
 
+The workflow intentionally contains orchestration only. Reusable validation,
+SBOM retrieval, scanning, and PR-reporting commands live in [`scripts/`](scripts/)
+so they can be syntax-checked and run independently.
+
 ## Application
 
 The sample requires Node.js 26.3.0 or a compatible Node 26 release. Node 26
