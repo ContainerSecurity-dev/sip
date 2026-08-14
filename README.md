@@ -20,6 +20,11 @@ npm start
 
 ## Supply-chain release
 
+Pull requests targeting `main` validate the locked dependency set, application
+build, and tests. Same-repository pull requests also build the Docker Hardened
+Image and publish a head-commit candidate with SBOM and maximum provenance
+attestations; fork pull requests never receive DHI or registry credentials.
+
 The release workflow builds from Docker Hardened Images, publishes a commit-SHA
 candidate with BuildKit SBOM and maximum provenance attestations, and scans the
 candidate by digest after explicitly retrieving its attached OCI SBOM. A successful Critical

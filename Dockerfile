@@ -6,9 +6,8 @@ WORKDIR /app
 
 COPY package.json package-lock.json .npmrc ./
 COPY scripts/validate-lockfile-age.mjs ./scripts/validate-lockfile-age.mjs
-RUN npm install --global npm@11.10.0 --ignore-scripts \
-    && node scripts/validate-lockfile-age.mjs \
-    && npm ci --ignore-scripts
+RUN node scripts/validate-lockfile-age.mjs \
+    && npm exec --yes --package=npm@11.10.0 -- npm ci --ignore-scripts
 
 COPY tsconfig.json ./
 COPY src ./src

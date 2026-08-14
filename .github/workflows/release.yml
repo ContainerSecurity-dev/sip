@@ -36,11 +36,62 @@ jobs:
 
       - name: Validate dependencies and build
         run: |
-          npm install --global npm@11.10.0 --ignore-scripts
           node scripts/validate-lockfile-age.mjs
-          npm ci --ignore-scripts
+          npm exec --yes --package=npm@11.10.0 -- npm ci --ignore-scripts
           npm run build
           npm test
+
+  container-ci:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    needs: ci
+    runs-on: ubuntu-latest
+    env:
+      CANDIDATE_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Check out PR head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ env.CANDIDATE_SHA }}
+
+      - name: Log in to Docker Hardened Images
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: dhi.io
+          username: ${{ secrets.DHI_USERNAME }}
+          password: ${{ secrets.DHI_PASSWORD }}
+
+      - name: Log in to GHCR
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      - name: Build and push PR candidate with attestations
+        id: build
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          sbom: true
+          provenance: mode=max
+          outputs: type=image,name=${{ env.IMAGE }}:sha-${{ env.CANDIDATE_SHA }},push=true,oci-mediatypes=true,oci-artifact=true
+
+      - name: Record immutable candidate reference
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          test -n "$DIGEST"
+          {
+            echo "### Attested PR candidate"
+            echo '```text'
+            echo "${IMAGE}@${DIGEST}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
   release:
     if: github.event_name != 'pull_request'
@@ -71,9 +122,8 @@ jobs:
 
       - name: Install locked dependencies
         run: |
-          npm install --global npm@11.10.0 --ignore-scripts
           node scripts/validate-lockfile-age.mjs
-          npm ci --ignore-scripts
+          npm exec --yes --package=npm@11.10.0 -- npm ci --ignore-scripts
 
       - name: Build application
         run: npm run build
