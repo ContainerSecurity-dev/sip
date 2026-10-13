@@ -8,4 +8,3 @@ Client: Docker Engine - Community
  OS/Arch:           linux/amd64
  Context:           desktop-linux
 failed to connect to the docker API at unix:///home/mohammad-ali/.docker/desktop/docker.sock; check if the path is correct and if the daemon is running: dial unix /home/mohammad-ali/.docker/desktop/docker.sock: connect: no such file or directory
-

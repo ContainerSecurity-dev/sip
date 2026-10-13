@@ -21,7 +21,7 @@ function run(command, args, { required = true, cwd, env } = {}) {
   const result = spawnSync(command, args, { cwd, env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   const seconds = (performance.now() - start) / 1000;
   const file = `${String(++sequence).padStart(3, '0')}-${command.replaceAll('/', '_')}.log`;
-  writeFileSync(join(output, file), `$ ${command} ${args.join(' ')}\n${result.stdout ?? ''}${result.stderr ?? ''}${result.error?.message ?? ''}\n`);
+  writeFileSync(join(output, file), `$ ${command} ${args.join(' ')}\n${result.stdout ?? ''}${result.stderr ?? ''}${result.error?.message ?? ''}`.trimEnd() + '\n');
   if (required && result.status !== 0) throw new Error(`${command} failed; see ${file}`);
   return { stdout: result.stdout?.trim(), status: result.status, seconds, log: file };
 }
