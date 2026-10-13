@@ -1,10 +1,13 @@
 # Reproducing the Node.js SIP case study
 
-Run from the repository root on branch `case-study/node-sip-benchmark`.
-The article is in `docs/docker-blog-draft.md`; experimental qualifications are
-in `docs/sip-benchmark-report.md`. No production release workflow is changed.
+Use branch `case-study/node-sip-benchmark`, repository root as your working
+directory. Read `docs/sip-benchmark-report.md` for measurement definitions and
+`docs/docker-blog-draft.md` for the editorial entry.
 
-## Local application and boundary tests
+## Application and controlled negative tests
+
+Requirements: Node/npm, bash and jq. The recorded final test run uses Node
+26.3.0/npm 11.16.0; Node 22.22.3/npm 11.14.1 also passed.
 
 ```bash
 node scripts/validate-lockfile-age.mjs
@@ -13,98 +16,144 @@ npm test
 npm run lint
 ```
 
-The recorded test host used Node 22.22.3 and npm 11.14.1. Container targets use
-Node 26.3.0; rerun tests with that version before publication. `lint` performs
-JavaScript and shell syntax checks, not ESLint. Tests use Node's built-in test
-runner. The lifecycle fixture is a local tarball with a harmless marker-writing
-postinstall script; no malicious dependency is downloaded. Its positive control
-explicitly enables the script inside a temporary directory.
+`lint` checks JavaScript/shell syntax, not style. Lifecycle tests use an offline
+local tarball that writes a harmless marker. The positive control deliberately
+enables its hook inside a temporary directory. No malicious package is used.
 
-## Container comparison
-
-Prerequisites: running Docker daemon, Buildx, jq, Node/npm, Trivy (use the release
-workflow's 0.72.0 for comparison), access to DHI, and push/pull access to a
-**dedicated benchmark registry repository**. Authenticate interactively with
-`docker login dhi.io` and your benchmark registry. Do not use production tags.
-Confirm these exact base tags are available; the harness records their digests
-or fails. It does not silently substitute a different Node or Debian version.
+To supply the exact Node version and jq in a separate test-only container:
 
 ```bash
-docker version
-docker buildx version
-trivy --version
-BENCHMARK_IMAGE=ghcr.io/YOUR_ACCOUNT/sip-benchmark \
+docker build -t sip-benchmark-test-tools experiments/testing
+repo_dir=$(pwd -P)
+docker run --rm --user "$(id -u):$(id -g)" \
+  --mount "type=bind,src=$repo_dir,dst=/work" -w /work \
+  sip-benchmark-test-tools sh -c 'npm test && npm run lint'
+```
+
+The host checkout must already contain the installed dependencies. Keep the
+checkout in a Docker Desktop shared directory; this installation could mount
+the home directory but could not mount the host `/tmp` checkout.
+
+## Container benchmark
+
+Requirements: running Docker daemon, Buildx, jq, Node/npm, DHI read access and
+registry access. Trivy is run as a **digest-pinned container**, so no host Trivy
+installation is needed. Authenticate with `docker login dhi.io` if required.
+The recorded DHI anonymous metadata request returned 401; existing authenticated
+Buildx access worked. Do not put tokens in arguments, logs or committed files.
+
+The measured run used a disposable local registry. Confirm port 5000 and the
+container name are available before starting it:
+
+```bash
+docker run -d --name sip-benchmark-registry \
+  -p 127.0.0.1:5000:5000 registry:2
+BENCHMARK_IMAGE=localhost:5000/sip-benchmark \
+  TRIVY_NETWORK=container:sip-benchmark-registry \
   REPETITIONS=3 node experiments/scripts/benchmark.mjs
 ```
 
-Replace `YOUR_ACCOUNT` with its lowercase value. The harness creates unique
-baseline/hardened candidate tags. It never promotes them. Each run writes raw
-command logs, image metadata, SBOM/provenance exports, runtime scan reports,
-attached-SBOM gate results and `results.json` under `experiments/results/run-*`.
-Failed preflights also write `results.json`; missing data are not zeroes.
+The Trivy container shares the disposable registry's network namespace so its
+`localhost:5000` reference resolves to the same registry. It does not receive
+the host Docker socket or credential store. For a remote registry, use a
+separate test repository and omit `TRIVY_NETWORK` (default `bridge`); private
+registry authentication for the scanner needs separate secure configuration.
+The recorded local path requires no registry credentials.
 
-Both variants copy the same root `src/`, `package.json`, `package-lock.json` and
-`tsconfig.json`. Baseline uses a conventional multi-stage official Node slim
-image and `npm ci`, so a deliberately bloated image or unlocked install does not
-bias the comparison. It omits `.npmrc`, uses default lifecycle behavior and has
-no release gate. Hardened mirrors the root Dockerfile with base-image ARGs so
-the harness can pin resolved digests. Keep the two Dockerfiles aligned when the
-reference changes. Only the hardened path calls the age validator first.
+The default Trivy cache is a sibling `sip-benchmark-trivy-cache` directory,
+outside the Git checkout. Override it with `TRIVY_CACHE_DIR` if needed; it must
+also be Docker-shareable. `RESULTS_DIR` selects the evidence directory.
+`TRIVY_IMAGE` can override the default image but must be recorded/pinned for a
+comparable run. Default is Trivy 0.72.0 at digest
+`sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f`.
 
-The intended distribution match is Debian 13 (official Node `trixie-slim`, DHI
-`debian13`), Node 26.3.0, linux/amd64. Actual image availability, bundled npm,
-OS details, shell/package-manager absence and user identity remain unverified
-until a successful container run. Record these from image inspection/runtime
-commands before drawing conclusions; do not infer them from tag spelling.
+The harness resolves and records base digests, freezes the vulnerability DB
+snapshot, alternates variant order, disables Dockerfile cache reuse, and pushes
+unique candidate tags. It probes application behavior and scans both runtime
+images, then separately retrieves/scans the hardened attached SBOM. A failed
+security gate is recorded; no candidate is promoted by this harness.
+A completed measurement run can therefore correctly contain failed gates.
 
-The harness alternates variant order and uses `--no-cache --pull`. This disables
-Dockerfile layer reuse, not host/network/base-download caches. Median build
-seconds include push and, for SIP, attestation generation. Runtime vulnerability
-counts use the same Trivy database snapshot, include unfixed findings, and count
-finding occurrences, not distinct CVE identifiers. Attached-SBOM scanning is
-reported separately because its coverage can differ. Compressed layer bytes
-sum the selected platform manifest's layer descriptor sizes, excluding config,
-index and attestations; local image bytes are Docker's `.Size`. Neither is disk
-space reclaimed or incremental transfer size.
+Both variants copy the same application and lockfile. Baseline deliberately
+uses a conventional multi-stage `node:26.3.0-trixie-slim` image and `npm ci`,
+without `.npmrc`, age validation, attestations or release gates. Hardened mirrors
+the root Dockerfile, adding build/runtime image ARGs for immutable pinning.
+It validates dependencies before building. A standalone Dockerfile invocation
+alone does not enforce publication age. Keep this experimental copy aligned
+with the reference when the reference changes.
 
-## Release checks and remaining measurements
+### Measurement definitions
 
-The experimental promotion helper checks eligibility and verifies tag digest
-identity after promotion. Invoke it **only after a successful attached-SBOM gate**
-and against a disposable benchmark tag; it does not authenticate approval or
-verify evidence itself. For example, after a successful hardened run:
+- Build seconds include registry push and, for SIP, SBOM/provenance generation.
+- Base downloads, network and host caches are not reset by `--no-cache`.
+- Compressed size sums platform runtime-layer descriptor bytes; it excludes
+  config, indexes and attestations. Local size is Docker's `.Size`, not unpacked
+  size or incremental disk cost. Blog MB uses decimal units.
+- Runtime CVE counts include unfixed findings and count occurrences, not distinct
+  CVE identifiers. Attached-SBOM gate results are reported separately.
+- Security verification timing covers attached-SBOM retrieval and the scan;
+  lockfile validation has its own duration. DB download is outside scan timing.
+- Local harness duration is not complete GitHub Actions pipeline duration.
+- Compare recorded rebuild digests; a lockfile does not guarantee byte identity.
+
+The completed run is `experiments/results/docker-run-2/`. Its harness snapshot
+and source hashes preserve exactly what was measured. Earlier failed preflights
+are retained separately. Large raw logs/JSON can be losslessly compressed:
 
 ```bash
-export IMAGE=ghcr.io/YOUR_ACCOUNT/sip-benchmark
-export DIGEST=sha256:REPLACE_WITH_RECORDED_DIGEST
-export REF_TYPE=branch REF_NAME=main PROMOTION_TAG=verified-benchmark
-scripts/retrieve-attached-sbom.sh
-trivy sbom --scanners vuln --severity CRITICAL --ignore-unfixed \
-  --exit-code 1 sbom.spdx.json
-experiments/scripts/promote.sh
+node experiments/scripts/archive-results.mjs experiments/results/docker-run-2
+gzip -dc experiments/results/docker-run-2/hardened-1/sbom.json.gz
 ```
 
-A tag pattern is an eligibility policy, not proof of organizational approval.
-Protect refs and environments separately. The helper's post-check detects a
-mismatch; it cannot make mutable tags atomic or roll back a wrong promotion.
-The production workflow already promotes by candidate digest; its behavior has
-not been replaced with this experimental helper.
+Run `node experiments/scripts/verify-results.mjs experiments/results/docker-run-2`
+to cross-check counts, gates and medians against the raw reports.
+Compression is optional and does not change measurement values. Raw evidence
+under `.gz` remains ordinary JSON/text after decompression.
 
-Complete CI pipeline duration is **Not measured**. A local harness duration is
-not that metric. Run matched isolated baseline and SIP workflows on identical
-runner types in a disposable fork, record run/job start and completion times
-(including the chosen queue/approval policy), and export with:
+## Promotion and full CI timing
+
+The measured SIP candidates failed the real Critical gate; **do not promote
+them**. `experiments/scripts/promote.sh` is an experimental helper for a future
+candidate that has already passed its attached-SBOM gate. It checks eligible
+refs, copies the exact digest, and compares the destination tag afterward. It
+does not authenticate organizational approval, replace the gate, or make mutable
+tags transactional. Production workflow behavior is unchanged.
+
+Complete hosted CI duration remains **Not measured**: no fresh hosted workflow
+was dispatched. To measure it, run matched isolated baseline/SIP workflows on
+identical runners in a disposable test repository with appropriate DHI access,
+then export each run and jobs (define whether approvals/queue time count):
 
 ```bash
 gh api repos/OWNER/REPO/actions/runs/RUN_ID > run.json
 gh api repos/OWNER/REPO/actions/runs/RUN_ID/jobs > jobs.json
 ```
 
-No new benchmark workflow was dispatched. Historical runs are not replacements.
-For reproducibility, compare per-platform manifests and application output as
-well as whole image indexes: timestamped provenance may change index digests.
-Do not claim bit-for-bit reproducibility from lockfile pinning alone.
+Do not substitute historical elapsed times or the local harness duration.
 
-Docker Sandboxes isolation is **Not measured**. A working Sandboxes installation
-and controlled host-filesystem/network/credential boundary probes are required;
-configuration text is not runtime evidence.
+## Docker Sandboxes boundaries
+
+`sbx` 0.48.0 was tested with no workspace mounts or shared skills. On a dedicated
+unused test installation, initialize the intended network policy first:
+
+```bash
+sbx policy init deny-all
+experiments/scripts/sandbox-probes.sh
+```
+
+`policy init` affects the installation's global policy. Do not reset a user's
+existing policy to reproduce this test. The script creates/removes only its own
+sandbox and does not change policy. It verifies host-file/environment exclusion,
+sandbox-write isolation and a denied HTTPS request corroborated by the proxy
+policy log. It does not run an AI agent, test all escape paths, or establish CI
+sandboxing. Original observations are in `results/sandbox/`; the reusable script's
+run is in `results/sandbox-script-run/`.
+
+After collecting evidence, clean up only the experiment's registry:
+
+```bash
+docker rm -f sip-benchmark-registry
+```
+
+This discards that registry's temporary image storage. Source, raw evidence and
+locally pulled images remain available. Do not run global prune/reset commands.

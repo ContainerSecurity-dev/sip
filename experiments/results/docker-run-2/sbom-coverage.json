@@ -1,0 +1,11 @@
+{
+  "runtimePackages": 99,
+  "additionalInventories": [
+    {
+      "name": "sbom-build",
+      "packages": 426,
+      "typescriptPresent": false
+    }
+  ],
+  "gateInput": "SPDX only; AdditionalSPDXs are not passed to the production scanner"
+}

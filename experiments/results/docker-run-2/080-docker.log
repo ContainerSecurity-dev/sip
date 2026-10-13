@@ -1,0 +1,29 @@
+$ docker buildx imagetools inspect localhost:5000/sip-benchmark@sha256:fa09c2dd311a88167a51d302ae1c521479e8ce0e9e933fad41191e1e8fc4c2c5 --raw
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.index.v1+json",
+  "manifests": [
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:5b7e60207c2e3c90bef2bf6e88af9b912854cb5dc4e8baea1c0ce24b4cfeab16",
+      "size": 2372,
+      "platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:4f4d16dabb756f186d7b27f98a3bbd4805e7aaf816f12c3d582ca2f4df8f72ad",
+      "size": 1385,
+      "annotations": {
+        "vnd.docker.reference.digest": "sha256:5b7e60207c2e3c90bef2bf6e88af9b912854cb5dc4e8baea1c0ce24b4cfeab16",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "baseline": {
+    "node": "v26.3.0",
+    "uid": 0,
+    "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.5\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+    "shell": true,
+    "npm": "11.16.0",
+    "imageDigest": "sha256:fdbd9468bc2cceee6a8de13c3f71aa21f8da8dd0ccc2c22aadf95cff5acfa0b7",
+    "config": {
+      "ExposedPorts": {
+        "3000/tcp": {}
+      },
+      "Env": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "NODE_VERSION=26.3.0",
+        "NODE_ENV=production"
+      ],
+      "Entrypoint": [
+        "docker-entrypoint.sh"
+      ],
+      "Cmd": [
+        "node",
+        "dist/index.js"
+      ],
+      "WorkingDir": "/app",
+      "ArgsEscaped": true
+    }
+  },
+  "hardened": {
+    "node": "v26.3.0",
+    "uid": 1000,
+    "os": "NAME=\"Docker Hardened Images (Debian)\"\nID=debian\nVERSION_ID=13\nVERSION_CODENAME=trixie\nPRETTY_NAME=\"Docker Hardened Images/Debian GNU/Linux 13 (trixie)\"\nHOME_URL=\"https://docker.com/products/hardened-images/\"\nBUG_REPORT_URL=\"https://docker.com/support/\"\n",
+    "shell": false,
+    "npm": null,
+    "imageDigest": "sha256:b9d9927e02580c1620d8396408aa580e87d87947827494ff451e1e9a3a81d4a9",
+    "config": {
+      "User": "node",
+      "ExposedPorts": {
+        "3000/tcp": {}
+      },
+      "Env": [
+        "NODE_VERSION=26.3.0",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "NODE_ENV=production"
+      ],
+      "Cmd": [
+        "node",
+        "dist/index.js"
+      ],
+      "WorkingDir": "/app",
+      "Labels": {
+        "com.docker.dhi.chain-id": "sha256:884900063ea8d3460b26556b51786f5165dc472dd9e26030c0cfbb5196ca7fc0",
+        "com.docker.dhi.compliance": "cis",
+        "com.docker.dhi.created": "2026-06-02T05:53:36Z",
+        "com.docker.dhi.date.release": "2026-05-05",
+        "com.docker.dhi.definition": "image/node/debian-13/26",
+        "com.docker.dhi.distro": "debian-13",
+        "com.docker.dhi.entitlement": "public",
+        "com.docker.dhi.flavor": "",
+        "com.docker.dhi.name": "dhi/node",
+        "com.docker.dhi.package-manager": "",
+        "com.docker.dhi.shell": "",
+        "com.docker.dhi.title": "Node.js 26.x",
+        "com.docker.dhi.url": "https://dhi.io/catalog/node",
+        "com.docker.dhi.variant": "runtime",
+        "com.docker.dhi.version": "26.3.0-debian13"
+      },
+      "ArgsEscaped": true
+    }
+  },
+  "hardenedBuildNpm": {
+    "exit": 125,
+    "stdout": "",
+    "stderr": "Unable to find image 'dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88' locally\ndocker: Error response from daemon: unknown: failed to resolve reference \"dhi.io/node@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88\": failed to authorize: failed to fetch anonymous token: unexpected status from GET request to https://dhi.io/token?scope=repository%3Anode%3Apull&service=registry.docker.io: 401 Unauthorized\n\nRun 'docker run --help' for more information\n"
+  },
+  "hardenedBuildNpmViaLoadedBuildStage": {
+    "version": "11.16.0",
+    "evidence": "../build-stage-inspect.log"
+  }
+}

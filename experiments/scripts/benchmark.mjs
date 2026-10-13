@@ -5,6 +5,9 @@ import { spawnSync } from 'node:child_process';
 import { resolve, join } from 'node:path';
 import { performance } from 'node:perf_hooks';
 
+const trivyImage = process.env.TRIVY_IMAGE ?? 'aquasec/trivy:0.72.0@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f';
+const cache = resolve(process.env.TRIVY_CACHE_DIR ?? resolve('..', 'sip-benchmark-trivy-cache'));
+mkdirSync(cache, { recursive: true });
 const output = resolve(process.env.RESULTS_DIR ?? `experiments/results/run-${Date.now()}`);
 mkdirSync(output, { recursive: true });
 const report = { recordedAt: new Date().toISOString(), platform: 'linux/amd64', cache: 'no-cache; warm base downloads possible',
@@ -17,6 +20,13 @@ const report = { recordedAt: new Date().toISOString(), platform: 'linux/amd64', 
 function save() { writeFileSync(join(output, 'results.json'), JSON.stringify(report, null, 2) + '\n'); }
 let sequence = 0;
 function run(command, args, { required = true, cwd, env } = {}) {
+  if (command === 'trivy') {
+    args = ['run', '--rm', '--user', `${process.getuid()}:${process.getgid()}`,
+      '--network', process.env.TRIVY_NETWORK ?? 'bridge',
+      '--mount', `type=bind,src=${resolve('.')},dst=${resolve('.')}`,
+      '--mount', `type=bind,src=${cache},dst=${cache}`, '-w', resolve('.'), trivyImage, ...args];
+    command = 'docker';
+  }
   const start = performance.now();
   const result = spawnSync(command, args, { cwd, env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   const seconds = (performance.now() - start) / 1000;
@@ -43,9 +53,10 @@ try {
     bases[key] = `${tag}@${digest}`;
   }
   report.bases = bases;
-  const cache = join(output, 'trivy-cache');
+  report.trivyImage = trivyImage;
   run('trivy', ['image', '--cache-dir', cache, '--download-db-only']);
   report.vulnerabilityDatabase = JSON.parse(readFileSync(join(cache, 'db/metadata.json'), 'utf8'));
+  writeFileSync(join(output, 'db-metadata.json'), JSON.stringify(report.vulnerabilityDatabase, null, 2) + '\n');
   for (let iteration = 1; iteration <= count; iteration++) {
     // Alternate ordering to reduce consistent ordering bias.
     for (const variant of iteration % 2 ? ['baseline', 'hardened'] : ['hardened', 'baseline']) {
@@ -59,6 +70,7 @@ try {
       if (variant === 'baseline') args.push('--build-arg', `BASE_IMAGE=${bases.baseline}`, '--sbom=false', '--provenance=false');
       else args.push('--build-arg', `BUILD_IMAGE=${bases.build}`, '--build-arg', `RUNTIME_IMAGE=${bases.runtime}`, '--sbom=true', '--provenance=mode=max');
       args.push('--output', 'type=image,push=true,oci-mediatypes=true,oci-artifact=true', '.');
+      row.imageTag = args[args.indexOf('--tag') + 1];
       row.buildSeconds = run('docker', args).seconds;
       row.digest = JSON.parse(readFileSync(join(dir, 'build.json'), 'utf8'))['containerimage.digest'];
       if (!/^sha256:[a-f0-9]{64}$/.test(row.digest)) throw new Error('Build did not return immutable digest');
@@ -88,6 +100,9 @@ try {
         const verification = performance.now();
         run('bash', [resolve('scripts/retrieve-attached-sbom.sh')], { cwd: dir, env: { IMAGE: image, DIGEST: row.digest } });
         const gate = run('trivy', ['sbom', '--cache-dir', cache, '--skip-db-update', '--scanners', 'vuln', '--severity', 'CRITICAL', '--ignore-unfixed', '--exit-code', '1', '--format', 'json', '--output', join(dir, 'gate.json'), join(dir, 'sbom.spdx.json')], { required: false });
+        const gateReport = JSON.parse(readFileSync(join(dir, 'gate.json'), 'utf8'));
+        row.gateFindingCount = (gateReport.Results ?? []).flatMap(result => result.Vulnerabilities ?? []).length;
+        if (gate.status !== (row.gateFindingCount > 0 ? 1 : 0)) throw new Error('Scanner failed independently of the vulnerability gate');
         row.gateExitCode = gate.status;
         row.securityVerificationSeconds = (performance.now() - verification) / 1000;
       }
@@ -97,7 +112,7 @@ try {
   }
   const median = values => { values.sort((a, b) => a - b); const n = values.length; return n % 2 ? values[(n - 1) / 2] : (values[n / 2 - 1] + values[n / 2]) / 2; };
   report.medians = Object.fromEntries(['baseline', 'hardened'].map(variant => [variant, Object.fromEntries(
-    ['buildSeconds', 'securityVerificationSeconds', 'harnessSeconds'].map(metric => {
+    ['buildSeconds', 'securityVerificationSeconds', 'dependencyVerificationSeconds', 'harnessSeconds', 'compressedLayerBytes', 'localImageBytes'].map(metric => {
       const values = report.runs.filter(r => r.variant === variant && typeof r[metric] === 'number').map(r => r[metric]);
       return [metric, values.length ? median(values) : null];
     }))]));

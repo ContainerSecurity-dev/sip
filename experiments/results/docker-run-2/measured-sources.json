@@ -1,0 +1,12 @@
+{
+  "src/index.ts": "ae974752ea23dd17905f5d5549cd9686de2d79d9a2c938259f6a573ad47c7955",
+  "package.json": "d715ce73890d5c4bb5b13d4cdca186b85d572febb9ead3d34a69b1a9650e8426",
+  "package-lock.json": "a43c797400c7b6fc1cdad29483c4ea453fd7cb5ba6fee8aaa48817b0be31e3ab",
+  "tsconfig.json": "591e60e3786481ff0334b879536edcf9433c324927cd4ec269c9754f4f330ab5",
+  ".npmrc": "ed8c0743252ba04a78d165ee29ae1e876248b27107887e1a4f14cc5b7da95efa",
+  "experiments/baseline/Dockerfile": "801f6a683f2a6c20e03b069d98b099eb7593a1879c1ad456f529bc3f3a2eac33",
+  "experiments/hardened/Dockerfile": "69a776cc800288d2f4aad9dcf1e16de7779b90234d4f78e2f1c6fe0f841f1cee",
+  "scripts/validate-lockfile-age.mjs": "c0be17c3b5c117d1296a35f50dee9326269aea77bdbcd09429af36625108946b",
+  "scripts/retrieve-attached-sbom.sh": "aaf8baa8e6e4278dcc1cd76a339737bb1d22eecaae66d0060c368bfbd8d9c7b7",
+  "experiments/results/docker-run-2/benchmark-source.mjs": "9b931e9f89730ac7904f06e1ac61cd22670fbf8000cdda40cb3a10e7115905bc"
+}

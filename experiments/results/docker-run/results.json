@@ -1,0 +1,54 @@
+{
+  "recordedAt": "2026-10-13T20:20:39.129Z",
+  "platform": "linux/amd64",
+  "cache": "no-cache; warm base downloads possible",
+  "source": "549e116f2c260793cae9816916894c83431b9e49",
+  "tools": {
+    "node": {
+      "stdout": "v22.22.3",
+      "status": 0,
+      "seconds": 0.004911474999999999,
+      "log": "003-node.log"
+    },
+    "npm": {
+      "stdout": "11.14.1",
+      "status": 0,
+      "seconds": 0.063615509,
+      "log": "004-npm.log"
+    },
+    "docker": {
+      "stdout": "Client: Docker Engine - Community\n Version:           29.5.3\n API version:       1.54\n Go version:        go1.26.4\n Git commit:        d1c06ef\n Built:             Wed Jun  3 18:00:12 2026\n OS/Arch:           linux/amd64\n Context:           desktop-linux\n\nServer: Docker Desktop 4.95.0 (242831)\n Engine:\n  Version:          29.8.2\n  API version:      1.56 (minimum version 1.40)\n  Go version:       go1.26.8\n  Git commit:       8af9fe3\n  Built:            Wed Sep 30 19:32:25 2026\n  OS/Arch:          linux/amd64\n  Experimental:     false\n containerd:\n  Version:          v2.3.6\n  GitCommit:        ee2735368117d2eb259779949d5e75cdafec9761\n runc:\n  Version:          1.5.1\n  GitCommit:        v1.5.1-0-g8f2685a4\n docker-init:\n  Version:          0.19.0\n  GitCommit:        de40ad0",
+      "status": 0,
+      "seconds": 0.023878415000000004,
+      "log": "005-docker.log"
+    },
+    "buildx": {
+      "stdout": "github.com/docker/buildx v0.37.2 2d379c0c3f22da0d2759d132a0ec81ca949098f0",
+      "status": 0,
+      "seconds": 0.04950005300000001,
+      "log": "006-docker.log"
+    },
+    "trivy": {
+      "stdout": "",
+      "status": 125,
+      "seconds": 0.019376292000000007,
+      "log": "007-docker.log"
+    },
+    "kernel": {
+      "stdout": "Linux stealth 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64 x86_64 x86_64 GNU/Linux",
+      "status": 0,
+      "seconds": 0.0020810979999999974,
+      "log": "008-uname.log"
+    }
+  },
+  "runs": [],
+  "status": "incomplete",
+  "limitations": [
+    "Wall-clock build includes push and, for SIP, attestations.",
+    "Repeated no-cache builds are not guaranteed bit-for-bit reproducible; compare recorded digests.",
+    "Local harness duration is not complete GitHub Actions pipeline duration.",
+    "Runtime image scans provide like-for-like CVE counts; attached SBOM gate has potentially broader scope."
+  ],
+  "dirty": true,
+  "blocker": "Trivy unavailable; vulnerability measurements Not measured"
+}

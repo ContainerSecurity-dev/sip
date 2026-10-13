@@ -1,0 +1,12 @@
+$ docker run --rm --user 1000:1000 --network container:sip-benchmark-registry --mount type=bind,src=/home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-node-case-study,dst=/home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-node-case-study --mount type=bind,src=/home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-benchmark-trivy-cache,dst=/home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-benchmark-trivy-cache -w /home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-node-case-study aquasec/trivy:0.72.0@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f image --cache-dir /home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-benchmark-trivy-cache --skip-db-update --scanners vuln --format json --output /home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-node-case-study/experiments/results/docker-run-2/baseline-1/runtime-trivy.json localhost:5000/sip-benchmark@sha256:fdbd9468bc2cceee6a8de13c3f71aa21f8da8dd0ccc2c22aadf95cff5acfa0b7
+2026-10-13T20:21:43Z	INFO	[vuln] Vulnerability scanning is enabled
+2026-10-13T20:21:44Z	INFO	Detected OS	family="debian" version="13.5"
+2026-10-13T20:21:44Z	INFO	[debian] Detecting vulnerabilities...	os_version="13" pkg_num=80
+2026-10-13T20:21:44Z	INFO	Number of language-specific files	num=1
+2026-10-13T20:21:44Z	INFO	[node-pkg] Detecting vulnerabilities...
+2026-10-13T20:21:44Z	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.72/guide/scanner/vulnerability#severity-selection for details.
+
+📣 [34mNotices:[0m
+  - Version 0.75.0 of Trivy is now available, current version is 0.72.0
+
+To suppress version checks, run Trivy scans with the --skip-version-check flag

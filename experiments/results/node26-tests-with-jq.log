@@ -1,0 +1,35 @@
+v26.3.0
+11.16.0
+
+> sip@1.0.0 test
+> npm run build && node --test scripts/*.test.mjs tests/*.test.mjs
+
+
+> sip@1.0.0 build
+> tsc
+
+✔ minimum age must be a complete positive integer (1.051331ms)
+✔ legacy and empty lockfiles fail closed (1.024849ms)
+✔ validates publication time and registry artifact identity (6.235197ms)
+✔ exact npmrc exclusions bypass only publication-age validation (0.352828ms)
+✔ transient registry failures receive bounded retries (250.409108ms)
+✔ stalled registry requests time out and fail closed (5.969085ms)
+✔ Express serves the expected JSON and rejects unknown routes (34.910096ms)
+✔ missing, empty and malformed attached SBOMs fail closed; valid fixture succeeds (36.182566ms)
+✔ Critical scanner fixture fails workflow gate; clean fixture passes (13.527926ms)
+✔ release refs reject feature branches and non-release tags (6.263023ms)
+✔ promotion uses verified digest and checks resulting tag; unauthorized refs never invoke Docker (19.083556ms)
+✔ npm ci --ignore-scripts prevents a harmless dependency lifecycle marker (1005.070016ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1143.019285
+
+> sip@1.0.0 lint
+> node experiments/scripts/check-syntax.mjs
+
+JavaScript and shell syntax checks passed (not a style linter).

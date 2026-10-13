@@ -1,0 +1,2 @@
+$ docker run --rm --entrypoint node localhost:5000/sip-benchmark@sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c --version
+v26.3.0

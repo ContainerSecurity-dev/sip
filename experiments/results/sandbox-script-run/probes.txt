@@ -1,0 +1,6 @@
+host-file=inaccessible
+host-env=not-inherited
+sandbox-file=writable
+network-http=403
+host-write-isolation=pass
+network-policy-corroboration=pass

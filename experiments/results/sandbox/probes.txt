@@ -1,0 +1,17 @@
+  ✓ sandbox sip-benchmark-isolation — started
+host-file-readable=no
+host-env-inherited=no
+sandbox-write=sandbox-only
+network-probe
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0HTTP/1.1 200 OK
+
+HTTP/1.1 403 Forbidden
+Content-Length: 90
+Content-Type: text/plain
+
+  0     90   0      0   0      0      0      0                              0  0     90   0      0   0      0      0      0                              0  0     90   0      0   0      0      0      0                              0
+curl-exit=0
+host-container-visible=no
+sandbox-file-visible-on-host=no

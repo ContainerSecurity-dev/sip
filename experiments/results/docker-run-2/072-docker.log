@@ -1,0 +1,2 @@
+$ docker run -d --platform linux/amd64 localhost:5000/sip-benchmark@sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c
+e3d3f3c36a4c16a86011cceea7785f5925235f5e6e6b56964fd8872ab1a009bd

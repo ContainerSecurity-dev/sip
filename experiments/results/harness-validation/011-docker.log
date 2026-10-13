@@ -1,0 +1,2 @@
+$ docker buildx imagetools inspect dhi.io/node:26.3.0-debian13 --format {{json .Manifest.Digest}}
+"sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6"

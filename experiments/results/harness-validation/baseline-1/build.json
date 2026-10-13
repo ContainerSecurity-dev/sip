@@ -1,0 +1,75 @@
+{
+  "buildx.build.provenance": {
+    "builder": {
+      "id": ""
+    },
+    "buildType": "https://mobyproject.org/buildkit@v1",
+    "materials": [
+      {
+        "uri": "pkg:docker/docker/dockerfile@1",
+        "digest": {
+          "sha256": "4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e"
+        }
+      },
+      {
+        "uri": "pkg:docker/node@26.3.0-trixie-slim?digest=sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9\u0026platform=linux%2Famd64",
+        "digest": {
+          "sha256": "95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9"
+        }
+      }
+    ],
+    "invocation": {
+      "configSource": {
+        "entryPoint": "Dockerfile"
+      },
+      "parameters": {
+        "frontend": "gateway.v0",
+        "args": {
+          "build-arg:BASE_IMAGE": "node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9",
+          "cmdline": "docker/dockerfile:1",
+          "no-cache": "",
+          "source": "docker/dockerfile:1"
+        },
+        "locals": [
+          {
+            "name": "context"
+          },
+          {
+            "name": "dockerfile"
+          }
+        ],
+        "root": {
+          "configSource": {
+            "path": "Dockerfile"
+          },
+          "request": {
+            "args": {
+              "build-arg:BASE_IMAGE": "node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9",
+              "no-cache": "",
+              "vcs:localdir:context": ".",
+              "vcs:localdir:dockerfile": "experiments/baseline",
+              "vcs:revision": "549e116f2c260793cae9816916894c83431b9e49",
+              "vcs:source": "https://github.com/ContainerSecurity-dev/sip.git"
+            }
+          }
+        },
+        "compatibilityVersion": 30
+      },
+      "environment": {
+        "platform": "linux/amd64"
+      }
+    }
+  },
+  "buildx.build.ref": "desktop-linux/desktop-linux/erb6903ekaiya2f0unm6do8sw",
+  "containerimage.descriptor": {
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "digest": "sha256:a9bc4c753e6d4fe19a3f32c84652dc5682980b32dee2fedc4d8d12fdcc44cc92",
+    "size": 1806,
+    "platform": {
+      "architecture": "amd64",
+      "os": "linux"
+    }
+  },
+  "containerimage.digest": "sha256:a9bc4c753e6d4fe19a3f32c84652dc5682980b32dee2fedc4d8d12fdcc44cc92",
+  "image.name": "localhost:5000/sip-benchmark:baseline-1791923409623"
+}

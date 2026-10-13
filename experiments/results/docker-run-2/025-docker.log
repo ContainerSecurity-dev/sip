@@ -1,0 +1,217 @@
+$ docker buildx build --platform linux/amd64 --no-cache --pull -f experiments/hardened/Dockerfile --metadata-file /home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-node-case-study/experiments/results/docker-run-2/hardened-1/build.json --tag localhost:5000/sip-benchmark:hardened-1791922907712 --build-arg BUILD_IMAGE=dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88 --build-arg RUNTIME_IMAGE=dhi.io/node:26.3.0-debian13@sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6 --sbom=true --provenance=mode=max --output type=image,push=true,oci-mediatypes=true,oci-artifact=true .
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 767B done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 0.6s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e done
+#3 CACHED
+
+#4 resolve image config for docker-image://docker.io/docker/buildkit-syft-scanner:stable-1
+#4 ...
+
+#5 [auth] docker/buildkit-syft-scanner:pull token for registry-1.docker.io
+#5 DONE 0.0s
+
+#4 resolve image config for docker-image://docker.io/docker/buildkit-syft-scanner:stable-1
+#4 DONE 0.8s
+
+#6 [internal] load metadata for dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#6 ...
+
+#7 [auth] node:pull token for dhi.io
+#7 DONE 0.0s
+
+#8 [internal] load metadata for dhi.io/node:26.3.0-debian13@sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6
+#8 DONE 3.1s
+
+#6 [internal] load metadata for dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#6 DONE 3.2s
+
+#9 [internal] load .dockerignore
+#9 transferring context: 91B done
+#9 DONE 0.0s
+
+#10 [internal] load build context
+#10 transferring context: 229B done
+#10 DONE 0.0s
+
+#11 [runtime 1/5] FROM dhi.io/node:26.3.0-debian13@sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6
+#11 resolve dhi.io/node:26.3.0-debian13@sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6 0.0s done
+#11 DONE 0.1s
+
+#12 [build 1/7] FROM dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#12 resolve dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88 0.0s done
+#12 ...
+
+#13 docker-image://docker.io/docker/buildkit-syft-scanner:stable-1
+#13 resolve docker.io/docker/buildkit-syft-scanner:stable-1 0.2s done
+#13 CACHED
+
+#12 [build 1/7] FROM dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#12 sha256:2e42fcbc92cb3984282da728b82386398593a1c2a2f361a16d2784c588090ac9 0B / 6.47kB 0.2s
+#12 sha256:2e42fcbc92cb3984282da728b82386398593a1c2a2f361a16d2784c588090ac9 6.47kB / 6.47kB 0.6s done
+#12 sha256:69edc4e63325e3e6cdcb5d17e13e979ac76ec98a8d6ee6df743b13c8d18e641c 24.59kB / 24.59kB 0.2s done
+#12 sha256:44a6f8d909759ef0dbe22868d7167884313e9c15c8f992cde207be999df7ac9f 0B / 77B 0.2s
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 0B / 43.84MB 0.2s
+#12 sha256:44a6f8d909759ef0dbe22868d7167884313e9c15c8f992cde207be999df7ac9f 77B / 77B 0.5s done
+#12 sha256:725d1de21937210f7cf83d5c7ae074ddec8b86839679154e3b3008cd570ebe8c 0B / 851.56kB 0.2s
+#12 sha256:d36c35431300b20b11d7c86e3d6837dc308cb4e774092040c3a53e14d36d03bd 0B / 410B 0.3s
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 3.15MB / 43.84MB 1.1s
+#12 sha256:d36c35431300b20b11d7c86e3d6837dc308cb4e774092040c3a53e14d36d03bd 410B / 410B 0.5s done
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 9.44MB / 43.84MB 1.2s
+#12 sha256:c97a2657ab750c3604c12d6c0c8c2f3f58c8deed77853d5f3e852046ab536289 0B / 759.26kB 0.2s
+#12 ...
+
+#11 [runtime 1/5] FROM dhi.io/node:26.3.0-debian13@sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6
+#11 sha256:10bbd039018425c9478f175fa841e915e88327596afd78252d2b78df8913b445 6.34kB / 6.34kB 0.5s done
+#11 sha256:cee05d95bc5310eb3b8a9d6b1e71408a3c95be2a775fa044aef51e2cdde2dc58 3.50kB / 3.50kB 0.6s done
+#11 sha256:7aaaa8db571ef072eb48a98806899afc8d40647c36246cdb38bea8cea8c26f86 76B / 76B 0.6s done
+#11 sha256:adbc4ee03e9cb325ba767c1895aa3ff8db644742a9e17543595c735e9f3d0f73 353B / 353B 0.4s done
+#11 sha256:ffeacc324bb1d9ce1757d1383787d63eedbe57bdcd1c1fd3adbd7a1bf8768fa0 34.34MB / 34.34MB 2.0s done
+#11 sha256:d1967af7c6dc7f045b3e4aba45aff9e75b1d2cf8bfd746acb6e63f0553d54862 7.78MB / 7.78MB 1.3s done
+#11 sha256:65a6ba33b31d1158b60431148e8526a5bdc91a8847798b6d0d297294e74ae14f 181.02kB / 181.02kB 0.7s done
+#11 extracting sha256:65a6ba33b31d1158b60431148e8526a5bdc91a8847798b6d0d297294e74ae14f 0.0s done
+#11 extracting sha256:d1967af7c6dc7f045b3e4aba45aff9e75b1d2cf8bfd746acb6e63f0553d54862 0.1s done
+#11 extracting sha256:ffeacc324bb1d9ce1757d1383787d63eedbe57bdcd1c1fd3adbd7a1bf8768fa0 0.2s done
+#11 extracting sha256:adbc4ee03e9cb325ba767c1895aa3ff8db644742a9e17543595c735e9f3d0f73 done
+#11 extracting sha256:7aaaa8db571ef072eb48a98806899afc8d40647c36246cdb38bea8cea8c26f86 0.0s done
+#11 DONE 2.8s
+
+#12 [build 1/7] FROM dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 16.78MB / 43.84MB 1.4s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 0B / 47.25MB 0.2s
+#12 ...
+
+#11 [runtime 1/5] FROM dhi.io/node:26.3.0-debian13@sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6
+#11 extracting sha256:cee05d95bc5310eb3b8a9d6b1e71408a3c95be2a775fa044aef51e2cdde2dc58 done
+#11 extracting sha256:10bbd039018425c9478f175fa841e915e88327596afd78252d2b78df8913b445 0.0s done
+#11 DONE 2.8s
+
+#14 [runtime 2/5] WORKDIR /app
+#14 DONE 0.1s
+
+#12 [build 1/7] FROM dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 23.07MB / 43.84MB 1.5s
+#12 sha256:725d1de21937210f7cf83d5c7ae074ddec8b86839679154e3b3008cd570ebe8c 851.56kB / 851.56kB 1.0s done
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 29.36MB / 43.84MB 1.7s
+#12 sha256:da6a252cd7e3a8fb21b3355b76e95e6542f6459eafc38d81ca6c8e4da829ec88 181.02kB / 181.02kB 0.2s done
+#12 extracting sha256:da6a252cd7e3a8fb21b3355b76e95e6542f6459eafc38d81ca6c8e4da829ec88 0.0s done
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 34.60MB / 43.84MB 1.8s
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 40.89MB / 43.84MB 2.0s
+#12 sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 43.84MB / 43.84MB 2.0s done
+#12 sha256:c97a2657ab750c3604c12d6c0c8c2f3f58c8deed77853d5f3e852046ab536289 759.26kB / 759.26kB 1.3s done
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 5.24MB / 47.25MB 1.5s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 8.39MB / 47.25MB 1.7s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 14.68MB / 47.25MB 1.8s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 22.02MB / 47.25MB 2.0s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 25.17MB / 47.25MB 2.3s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 31.46MB / 47.25MB 2.4s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 40.89MB / 47.25MB 2.6s
+#12 sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 47.25MB / 47.25MB 2.6s done
+#12 extracting sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0
+#12 extracting sha256:c4d763fcdbfad0d7f9167738e65767eab77321625533d397cc215e2f737415e0 0.5s done
+#12 DONE 5.8s
+
+#12 [build 1/7] FROM dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#12 extracting sha256:c97a2657ab750c3604c12d6c0c8c2f3f58c8deed77853d5f3e852046ab536289 0.0s done
+#12 extracting sha256:d36c35431300b20b11d7c86e3d6837dc308cb4e774092040c3a53e14d36d03bd done
+#12 extracting sha256:725d1de21937210f7cf83d5c7ae074ddec8b86839679154e3b3008cd570ebe8c 0.0s done
+#12 extracting sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b
+#12 extracting sha256:e944ee9519809f30583c70f3401a7a862534b9420cf748b3257c6de6445a3b7b 0.7s done
+#12 DONE 6.5s
+
+#12 [build 1/7] FROM dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88
+#12 extracting sha256:44a6f8d909759ef0dbe22868d7167884313e9c15c8f992cde207be999df7ac9f 0.0s done
+#12 extracting sha256:69edc4e63325e3e6cdcb5d17e13e979ac76ec98a8d6ee6df743b13c8d18e641c done
+#12 extracting sha256:2e42fcbc92cb3984282da728b82386398593a1c2a2f361a16d2784c588090ac9 0.0s done
+#12 DONE 6.5s
+
+#15 [build 2/7] WORKDIR /app
+#15 DONE 0.2s
+
+#16 [build 3/7] COPY package.json package-lock.json .npmrc ./
+#16 DONE 0.0s
+
+#17 [build 4/7] RUN npm ci --ignore-scripts
+#17 0.767 npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+#17 0.835 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#17 0.879 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#17 1.890 
+#17 1.890 added 138 packages, and audited 139 packages in 2s
+#17 1.890 
+#17 1.890 34 packages are looking for funding
+#17 1.890   run `npm fund` for details
+#17 1.893 
+#17 1.893 6 vulnerabilities (1 moderate, 4 high, 1 critical)
+#17 1.893 
+#17 1.893 To address issues that do not require attention, run:
+#17 1.893   npm audit fix
+#17 1.893 
+#17 1.893 Some issues need review, and may require choosing
+#17 1.893 a different dependency.
+#17 1.893 
+#17 1.893 Run `npm audit` for details.
+#17 DONE 2.0s
+
+#18 [build 5/7] COPY tsconfig.json ./
+#18 DONE 0.0s
+
+#19 [build 6/7] COPY src ./src
+#19 DONE 0.0s
+
+#20 [build 7/7] RUN npm run build     && npm prune --omit=dev --ignore-scripts
+#20 0.189 
+#20 0.189 > sip@1.0.0 build
+#20 0.189 > tsc
+#20 0.189 
+#20 2.901 
+#20 2.901 removed 71 packages, and audited 68 packages in 3s
+#20 2.901 
+#20 2.901 26 packages are looking for funding
+#20 2.901   run `npm fund` for details
+#20 2.903 
+#20 2.903 2 vulnerabilities (1 moderate, 1 critical)
+#20 2.903 
+#20 2.903 To address all issues, run:
+#20 2.903   npm audit fix
+#20 2.903 
+#20 2.903 Run `npm audit` for details.
+#20 DONE 2.9s
+
+#21 [runtime 3/5] COPY --from=build --chown=node:node /app/package.json ./package.json
+#21 DONE 0.0s
+
+#22 [runtime 4/5] COPY --from=build --chown=node:node /app/node_modules ./node_modules
+#22 DONE 0.1s
+
+#23 [runtime 5/5] COPY --from=build --chown=node:node /app/dist ./dist
+#23 DONE 0.0s
+
+#24 [linux/amd64] generating sbom using docker.io/docker/buildkit-syft-scanner:stable-1
+#24 0.293 time="2026-10-13T20:22:05Z" level=info msg="starting syft scanner for buildkit v1.12.0"
+#24 DONE 6.1s
+
+#25 exporting to image
+#25 exporting layers 0.1s done
+#25 exporting manifest sha256:a0324f856a657f15f3c157d0a9663f0afcb22588081495a7c6bbf16a6a3f60f2 done
+#25 exporting config sha256:3989a530d336015737064afbdf06258af37ea5e28ef6c6a9a4680d50f2b7f4c1 done
+#25 exporting attestation manifest sha256:c3957fa14cab8754ef5733429b2a00d53206debce1c15c5325435bf6360f859b
+#25 exporting attestation manifest sha256:c3957fa14cab8754ef5733429b2a00d53206debce1c15c5325435bf6360f859b done
+#25 exporting manifest list sha256:b9d9927e02580c1620d8396408aa580e87d87947827494ff451e1e9a3a81d4a9 done
+#25 naming to localhost:5000/sip-benchmark:hardened-1791922907712 done
+#25 unpacking to localhost:5000/sip-benchmark:hardened-1791922907712
+#25 unpacking to localhost:5000/sip-benchmark:hardened-1791922907712 0.4s done
+#25 pushing layers
+#25 pushing layers 0.8s done
+#25 pushing manifest for localhost:5000/sip-benchmark:hardened-1791922907712@sha256:b9d9927e02580c1620d8396408aa580e87d87947827494ff451e1e9a3a81d4a9
+#25 pushing manifest for localhost:5000/sip-benchmark:hardened-1791922907712@sha256:b9d9927e02580c1620d8396408aa580e87d87947827494ff451e1e9a3a81d4a9 0.0s done
+#25 DONE 2.0s
+
+#26 resolving provenance for metadata file
+#26 DONE 0.0s

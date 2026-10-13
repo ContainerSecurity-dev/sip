@@ -1,0 +1,5 @@
+$ docker pull --platform linux/amd64 localhost:5000/sip-benchmark@sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c
+localhost:5000/sip-benchmark@sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c: Pulling from sip-benchmark
+Digest: sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c
+Status: Image is up to date for localhost:5000/sip-benchmark@sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c
+localhost:5000/sip-benchmark@sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c

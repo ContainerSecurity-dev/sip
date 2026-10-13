@@ -1,0 +1,3 @@
+# Raw command output retains tool-emitted whitespace and terminal line endings.
+*.log -whitespace
+*.txt -whitespace

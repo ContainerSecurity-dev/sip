@@ -1,0 +1,103 @@
+Unable to find image 'node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9' locally
+docker.io/library/node@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9: Pulling from library/node
+Digest: sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+Status: Downloaded newer image for node@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+v26.3.0
+11.16.0
+
+> sip@1.0.0 test
+> npm run build && node --test scripts/*.test.mjs tests/*.test.mjs
+
+
+> sip@1.0.0 build
+> tsc
+
+✔ minimum age must be a complete positive integer (2.03817ms)
+✔ legacy and empty lockfiles fail closed (0.288094ms)
+✔ validates publication time and registry artifact identity (6.096089ms)
+✔ exact npmrc exclusions bypass only publication-age validation (0.392394ms)
+✔ transient registry failures receive bounded retries (250.983577ms)
+✔ stalled registry requests time out and fail closed (6.105963ms)
+✔ Express serves the expected JSON and rejects unknown routes (32.668975ms)
+✖ missing, empty and malformed attached SBOMs fail closed; valid fixture succeeds (26.188174ms)
+✖ Critical scanner fixture fails workflow gate; clean fixture passes (13.768048ms)
+✔ release refs reject feature branches and non-release tags (10.852655ms)
+✖ promotion uses verified digest and checks resulting tag; unauthorized refs never invoke Docker (8.593473ms)
+✔ npm ci --ignore-scripts prevents a harmless dependency lifecycle marker (961.676296ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 9
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1072.160213
+
+✖ failing tests:
+
+test at tests/security.test.mjs:21:1
+✖ missing, empty and malformed attached SBOMs fail closed; valid fixture succeeds (26.188174ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  127 !== 0
+  
+      at file:///work/tests/security.test.mjs:29:10
+      at fixture (file:///work/tests/security.test.mjs:18:9)
+      at TestContext.<anonymous> (file:///work/tests/security.test.mjs:21:95)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 127,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security.test.mjs:32:1
+✖ Critical scanner fixture fails workflow gate; clean fixture passes (13.768048ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  127 !== 0
+  
+      at file:///work/tests/security.test.mjs:38:12
+      at fixture (file:///work/tests/security.test.mjs:18:9)
+      at TestContext.<anonymous> (file:///work/tests/security.test.mjs:32:82)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 127,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security.test.mjs:53:1
+✖ promotion uses verified digest and checks resulting tag; unauthorized refs never invoke Docker (8.593473ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  127 !== 0
+  
+      at file:///work/tests/security.test.mjs:55:10
+      at fixture (file:///work/tests/security.test.mjs:18:9)
+      at TestContext.<anonymous> (file:///work/tests/security.test.mjs:53:110)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 127,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

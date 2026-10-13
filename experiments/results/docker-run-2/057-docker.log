@@ -1,0 +1,52 @@
+$ docker buildx imagetools inspect localhost:5000/sip-benchmark@sha256:1494a7138dc3d21620e053c63d2dfb8c97bdf1854c8b00c01e742fc4989bef3f --raw
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "config": {
+    "mediaType": "application/vnd.oci.image.config.v1+json",
+    "digest": "sha256:0d0ec61f80f0240818b64790e5b6f9b358b952ef13cbe4148416ae4bc3e2b46c",
+    "size": 5863
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97",
+      "size": 29785415
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:1acb9de2b08ecfd2f1f8614fd0c30629734602221e208a77cfe2bd3494771a48",
+      "size": 3308
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:ad5e2960acd13a3611b2d3d1510b8eb29eef808811b78a3e14268e08fdee23d4",
+      "size": 54586089
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:0e08d948bf766ae1dcf67ccad5937ce7ef9cd3c964441460109912cc7c0b43c7",
+      "size": 446
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:accb5abc5e3c1b8518fb69c3209cb561f5ff888fd1b716fe439d3054726abdc5",
+      "size": 93
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:3755aadd8b6aeec5042fed4bcadcc8e3953897136bcfb4fc642510bcab4d8708",
+      "size": 498
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:69f010be52fcd5d79f4a4ef528d1614d10d6d8c8735f299295ab9877b7fd5d99",
+      "size": 643886
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:0485eb45ae9780366219b43340c468091e7343c4d699f0b92a8f737b74f88002",
+      "size": 945
+    }
+  ]
+}

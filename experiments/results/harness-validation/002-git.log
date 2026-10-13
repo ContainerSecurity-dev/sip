@@ -1,0 +1,19 @@
+$ git status --porcelain
+ M docs/docker-blog-draft.md
+ M docs/sip-benchmark-report.md
+ M experiments/README.md
+ M experiments/results/security-results.json
+ M experiments/scripts/benchmark.mjs
+?? experiments/results/build-stage-inspect.log
+?? experiments/results/docker-run-2/
+?? experiments/results/docker-run/
+?? experiments/results/hardened-build-npm.txt
+?? experiments/results/harness-validation/
+?? experiments/results/node26-test-image.log
+?? experiments/results/node26-tests-with-jq.log
+?? experiments/results/node26-tests.log
+?? experiments/results/sandbox-script-run/
+?? experiments/results/sandbox/
+?? experiments/scripts/archive-results.mjs
+?? experiments/scripts/sandbox-probes.sh
+?? experiments/testing/

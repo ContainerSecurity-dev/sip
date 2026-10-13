@@ -1,0 +1,901 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.72.0"
+  },
+  "ReportID": "01a136ee-f307-7650-bcd1-82e1de7650bd",
+  "CreatedAt": "2026-10-13T20:23:11.879415748Z",
+  "ArtifactName": "/home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-node-case-study/experiments/results/docker-run-2/hardened-3/sbom.spdx.json",
+  "ArtifactType": "spdx",
+  "Metadata": {
+    "OS": {
+      "Family": "none",
+      "Name": ""
+    }
+  },
+  "Results": [
+    {
+      "Target": "Node.js",
+      "Class": "lang-pkgs",
+      "Type": "node-pkg",
+      "Packages": [
+        {
+          "ID": "accepts@2.0.0",
+          "Name": "accepts",
+          "Identifier": {
+            "PURL": "pkg:npm/accepts@2.0.0",
+            "UID": "1713bfdaf986aca"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "body-parser@2.3.0",
+          "Name": "body-parser",
+          "Identifier": {
+            "PURL": "pkg:npm/body-parser@2.3.0",
+            "UID": "c3bedf3ccf546e5e"
+          },
+          "Version": "2.3.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "bytes@3.1.2",
+          "Name": "bytes",
+          "Identifier": {
+            "PURL": "pkg:npm/bytes@3.1.2",
+            "UID": "208a172c5c3eb152"
+          },
+          "Version": "3.1.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "call-bind-apply-helpers@1.0.2",
+          "Name": "call-bind-apply-helpers",
+          "Identifier": {
+            "PURL": "pkg:npm/call-bind-apply-helpers@1.0.2",
+            "UID": "6d07ba2ad3a9021f"
+          },
+          "Version": "1.0.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "call-bound@1.0.4",
+          "Name": "call-bound",
+          "Identifier": {
+            "PURL": "pkg:npm/call-bound@1.0.4",
+            "UID": "8055d3bd79d213e0"
+          },
+          "Version": "1.0.4",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "content-disposition@1.1.0",
+          "Name": "content-disposition",
+          "Identifier": {
+            "PURL": "pkg:npm/content-disposition@1.1.0",
+            "UID": "aca522e2b9482dc4"
+          },
+          "Version": "1.1.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "content-type@1.0.5",
+          "Name": "content-type",
+          "Identifier": {
+            "PURL": "pkg:npm/content-type@1.0.5",
+            "UID": "8fd94ef2a4a9f1d6"
+          },
+          "Version": "1.0.5",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "content-type@2.0.0",
+          "Name": "content-type",
+          "Identifier": {
+            "PURL": "pkg:npm/content-type@2.0.0",
+            "UID": "1162716716f5105d"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "content-type@2.0.0",
+          "Name": "content-type",
+          "Identifier": {
+            "PURL": "pkg:npm/content-type@2.0.0",
+            "UID": "1162716716f5105d"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "cookie@0.7.2",
+          "Name": "cookie",
+          "Identifier": {
+            "PURL": "pkg:npm/cookie@0.7.2",
+            "UID": "88ae71907fbe05e4"
+          },
+          "Version": "0.7.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "cookie-signature@1.2.2",
+          "Name": "cookie-signature",
+          "Identifier": {
+            "PURL": "pkg:npm/cookie-signature@1.2.2",
+            "UID": "9adfd3e9bd0d2b2b"
+          },
+          "Version": "1.2.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "debug@4.4.3",
+          "Name": "debug",
+          "Identifier": {
+            "PURL": "pkg:npm/debug@4.4.3",
+            "UID": "7a8c2764d4278c"
+          },
+          "Version": "4.4.3",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "depd@2.0.0",
+          "Name": "depd",
+          "Identifier": {
+            "PURL": "pkg:npm/depd@2.0.0",
+            "UID": "8574c8ac1b5f46f"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "dunder-proto@1.0.1",
+          "Name": "dunder-proto",
+          "Identifier": {
+            "PURL": "pkg:npm/dunder-proto@1.0.1",
+            "UID": "db4de68baf15709b"
+          },
+          "Version": "1.0.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "ee-first@1.1.1",
+          "Name": "ee-first",
+          "Identifier": {
+            "PURL": "pkg:npm/ee-first@1.1.1",
+            "UID": "3085dee3dcdb14ae"
+          },
+          "Version": "1.1.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "encodeurl@2.0.0",
+          "Name": "encodeurl",
+          "Identifier": {
+            "PURL": "pkg:npm/encodeurl@2.0.0",
+            "UID": "e8edee1b810906fa"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "es-define-property@1.0.1",
+          "Name": "es-define-property",
+          "Identifier": {
+            "PURL": "pkg:npm/es-define-property@1.0.1",
+            "UID": "4ac31d0fed4bf7e0"
+          },
+          "Version": "1.0.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "es-errors@1.3.0",
+          "Name": "es-errors",
+          "Identifier": {
+            "PURL": "pkg:npm/es-errors@1.3.0",
+            "UID": "a94703677701514e"
+          },
+          "Version": "1.3.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "es-object-atoms@1.1.2",
+          "Name": "es-object-atoms",
+          "Identifier": {
+            "PURL": "pkg:npm/es-object-atoms@1.1.2",
+            "UID": "e3da13985d6aa690"
+          },
+          "Version": "1.1.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "escape-html@1.0.3",
+          "Name": "escape-html",
+          "Identifier": {
+            "PURL": "pkg:npm/escape-html@1.0.3",
+            "UID": "b2a931749723064d"
+          },
+          "Version": "1.0.3",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "etag@1.8.1",
+          "Name": "etag",
+          "Identifier": {
+            "PURL": "pkg:npm/etag@1.8.1",
+            "UID": "41c6c1a28739d8f3"
+          },
+          "Version": "1.8.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "express@5.2.1",
+          "Name": "express",
+          "Identifier": {
+            "PURL": "pkg:npm/express@5.2.1",
+            "UID": "ffbc9def8b65ec53"
+          },
+          "Version": "5.2.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "finalhandler@2.1.1",
+          "Name": "finalhandler",
+          "Identifier": {
+            "PURL": "pkg:npm/finalhandler@2.1.1",
+            "UID": "7124e4c3161bb15a"
+          },
+          "Version": "2.1.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "forwarded@0.2.0",
+          "Name": "forwarded",
+          "Identifier": {
+            "PURL": "pkg:npm/forwarded@0.2.0",
+            "UID": "1ed608c41ad831b5"
+          },
+          "Version": "0.2.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "fresh@2.0.0",
+          "Name": "fresh",
+          "Identifier": {
+            "PURL": "pkg:npm/fresh@2.0.0",
+            "UID": "49358105c2e79573"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "function-bind@1.1.2",
+          "Name": "function-bind",
+          "Identifier": {
+            "PURL": "pkg:npm/function-bind@1.1.2",
+            "UID": "b78467bd7413ea20"
+          },
+          "Version": "1.1.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "get-intrinsic@1.3.0",
+          "Name": "get-intrinsic",
+          "Identifier": {
+            "PURL": "pkg:npm/get-intrinsic@1.3.0",
+            "UID": "95e1e5433426a7b"
+          },
+          "Version": "1.3.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "get-proto@1.0.1",
+          "Name": "get-proto",
+          "Identifier": {
+            "PURL": "pkg:npm/get-proto@1.0.1",
+            "UID": "dd8122295010afc9"
+          },
+          "Version": "1.0.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "gopd@1.2.0",
+          "Name": "gopd",
+          "Identifier": {
+            "PURL": "pkg:npm/gopd@1.2.0",
+            "UID": "99eb40a5a98282b2"
+          },
+          "Version": "1.2.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "has-symbols@1.1.0",
+          "Name": "has-symbols",
+          "Identifier": {
+            "PURL": "pkg:npm/has-symbols@1.1.0",
+            "UID": "3d418d39700e2bec"
+          },
+          "Version": "1.1.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "hasown@2.0.4",
+          "Name": "hasown",
+          "Identifier": {
+            "PURL": "pkg:npm/hasown@2.0.4",
+            "UID": "375578cec0db1513"
+          },
+          "Version": "2.0.4",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "http-errors@2.0.1",
+          "Name": "http-errors",
+          "Identifier": {
+            "PURL": "pkg:npm/http-errors@2.0.1",
+            "UID": "2c95d8e48de2f055"
+          },
+          "Version": "2.0.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "iconv-lite@0.7.3",
+          "Name": "iconv-lite",
+          "Identifier": {
+            "PURL": "pkg:npm/iconv-lite@0.7.3",
+            "UID": "960ff781eec98ca2"
+          },
+          "Version": "0.7.3",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "inherits@2.0.4",
+          "Name": "inherits",
+          "Identifier": {
+            "PURL": "pkg:npm/inherits@2.0.4",
+            "UID": "f53a8fa3bb39152e"
+          },
+          "Version": "2.0.4",
+          "Licenses": [
+            "ISC"
+          ]
+        },
+        {
+          "ID": "ipaddr.js@1.9.1",
+          "Name": "ipaddr.js",
+          "Identifier": {
+            "PURL": "pkg:npm/ipaddr.js@1.9.1",
+            "UID": "88a9f094d5fbddd2"
+          },
+          "Version": "1.9.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "is-promise@4.0.0",
+          "Name": "is-promise",
+          "Identifier": {
+            "PURL": "pkg:npm/is-promise@4.0.0",
+            "UID": "c6aac3859b0bd5a3"
+          },
+          "Version": "4.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "math-intrinsics@1.1.0",
+          "Name": "math-intrinsics",
+          "Identifier": {
+            "PURL": "pkg:npm/math-intrinsics@1.1.0",
+            "UID": "92f40b101318311f"
+          },
+          "Version": "1.1.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "media-typer@1.1.1",
+          "Name": "media-typer",
+          "Identifier": {
+            "PURL": "pkg:npm/media-typer@1.1.1",
+            "UID": "1f3feca9d1d2510e"
+          },
+          "Version": "1.1.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "merge-descriptors@2.0.0",
+          "Name": "merge-descriptors",
+          "Identifier": {
+            "PURL": "pkg:npm/merge-descriptors@2.0.0",
+            "UID": "f15ae024f4549db7"
+          },
+          "Version": "2.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "mime-db@1.54.0",
+          "Name": "mime-db",
+          "Identifier": {
+            "PURL": "pkg:npm/mime-db@1.54.0",
+            "UID": "a5d6f7a8f96680c8"
+          },
+          "Version": "1.54.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "mime-types@3.0.2",
+          "Name": "mime-types",
+          "Identifier": {
+            "PURL": "pkg:npm/mime-types@3.0.2",
+            "UID": "ea4711879b98162b"
+          },
+          "Version": "3.0.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "ms@2.1.3",
+          "Name": "ms",
+          "Identifier": {
+            "PURL": "pkg:npm/ms@2.1.3",
+            "UID": "aef0f507f72a92e3"
+          },
+          "Version": "2.1.3",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "negotiator@1.0.0",
+          "Name": "negotiator",
+          "Identifier": {
+            "PURL": "pkg:npm/negotiator@1.0.0",
+            "UID": "e023d320063eacc6"
+          },
+          "Version": "1.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "object-inspect@1.13.4",
+          "Name": "object-inspect",
+          "Identifier": {
+            "PURL": "pkg:npm/object-inspect@1.13.4",
+            "UID": "89659729043ee09"
+          },
+          "Version": "1.13.4",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "on-finished@2.4.1",
+          "Name": "on-finished",
+          "Identifier": {
+            "PURL": "pkg:npm/on-finished@2.4.1",
+            "UID": "dbb71a14260e8c6"
+          },
+          "Version": "2.4.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "once@1.4.0",
+          "Name": "once",
+          "Identifier": {
+            "PURL": "pkg:npm/once@1.4.0",
+            "UID": "eb983b9e94c0f05"
+          },
+          "Version": "1.4.0",
+          "Licenses": [
+            "ISC"
+          ]
+        },
+        {
+          "ID": "parseurl@1.3.3",
+          "Name": "parseurl",
+          "Identifier": {
+            "PURL": "pkg:npm/parseurl@1.3.3",
+            "UID": "3906189649333382"
+          },
+          "Version": "1.3.3",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "path-to-regexp@8.4.2",
+          "Name": "path-to-regexp",
+          "Identifier": {
+            "PURL": "pkg:npm/path-to-regexp@8.4.2",
+            "UID": "b0d9301cf4ff0fbc"
+          },
+          "Version": "8.4.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "proxy-addr@2.0.7",
+          "Name": "proxy-addr",
+          "Identifier": {
+            "PURL": "pkg:npm/proxy-addr@2.0.7",
+            "UID": "58fe8731b803647"
+          },
+          "Version": "2.0.7",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "qs@6.15.3",
+          "Name": "qs",
+          "Identifier": {
+            "PURL": "pkg:npm/qs@6.15.3",
+            "UID": "48444ea63e983f21"
+          },
+          "Version": "6.15.3",
+          "Licenses": [
+            "BSD-3-Clause"
+          ]
+        },
+        {
+          "ID": "range-parser@1.3.0",
+          "Name": "range-parser",
+          "Identifier": {
+            "PURL": "pkg:npm/range-parser@1.3.0",
+            "UID": "2d8f048c8c0f5e47"
+          },
+          "Version": "1.3.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "raw-body@3.0.2",
+          "Name": "raw-body",
+          "Identifier": {
+            "PURL": "pkg:npm/raw-body@3.0.2",
+            "UID": "c384b6e57659d71e"
+          },
+          "Version": "3.0.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "router@2.2.0",
+          "Name": "router",
+          "Identifier": {
+            "PURL": "pkg:npm/router@2.2.0",
+            "UID": "aeb59e2ebbfca443"
+          },
+          "Version": "2.2.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "safer-buffer@2.1.2",
+          "Name": "safer-buffer",
+          "Identifier": {
+            "PURL": "pkg:npm/safer-buffer@2.1.2",
+            "UID": "f426297f8f8480b4"
+          },
+          "Version": "2.1.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "send@1.2.1",
+          "Name": "send",
+          "Identifier": {
+            "PURL": "pkg:npm/send@1.2.1",
+            "UID": "b9a7c836d1802c96"
+          },
+          "Version": "1.2.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "serve-static@2.2.1",
+          "Name": "serve-static",
+          "Identifier": {
+            "PURL": "pkg:npm/serve-static@2.2.1",
+            "UID": "a1281dec6cfe063a"
+          },
+          "Version": "2.2.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "setprototypeof@1.2.0",
+          "Name": "setprototypeof",
+          "Identifier": {
+            "PURL": "pkg:npm/setprototypeof@1.2.0",
+            "UID": "352c6ab63a85e6c3"
+          },
+          "Version": "1.2.0",
+          "Licenses": [
+            "ISC"
+          ]
+        },
+        {
+          "ID": "side-channel@1.1.1",
+          "Name": "side-channel",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel@1.1.1",
+            "UID": "f9222377ef8b6c6b"
+          },
+          "Version": "1.1.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "side-channel-list@1.0.1",
+          "Name": "side-channel-list",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel-list@1.0.1",
+            "UID": "1620e3c2fde76938"
+          },
+          "Version": "1.0.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "side-channel-map@1.0.1",
+          "Name": "side-channel-map",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel-map@1.0.1",
+            "UID": "829ae69586810491"
+          },
+          "Version": "1.0.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "side-channel-weakmap@1.0.2",
+          "Name": "side-channel-weakmap",
+          "Identifier": {
+            "PURL": "pkg:npm/side-channel-weakmap@1.0.2",
+            "UID": "440bbee82596eae0"
+          },
+          "Version": "1.0.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "sip@1.0.0",
+          "Name": "sip",
+          "Identifier": {
+            "PURL": "pkg:npm/sip@1.0.0",
+            "UID": "d8c4936107aa604c"
+          },
+          "Version": "1.0.0",
+          "Licenses": [
+            "ISC"
+          ]
+        },
+        {
+          "ID": "statuses@2.0.2",
+          "Name": "statuses",
+          "Identifier": {
+            "PURL": "pkg:npm/statuses@2.0.2",
+            "UID": "2c8be6865f8fcdc3"
+          },
+          "Version": "2.0.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "toidentifier@1.0.1",
+          "Name": "toidentifier",
+          "Identifier": {
+            "PURL": "pkg:npm/toidentifier@1.0.1",
+            "UID": "91ac3c79f6b22f89"
+          },
+          "Version": "1.0.1",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "type-is@2.1.0",
+          "Name": "type-is",
+          "Identifier": {
+            "PURL": "pkg:npm/type-is@2.1.0",
+            "UID": "ce28dca06a10dd27"
+          },
+          "Version": "2.1.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "unpipe@1.0.0",
+          "Name": "unpipe",
+          "Identifier": {
+            "PURL": "pkg:npm/unpipe@1.0.0",
+            "UID": "7f5316e23b40e549"
+          },
+          "Version": "1.0.0",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "vary@1.1.2",
+          "Name": "vary",
+          "Identifier": {
+            "PURL": "pkg:npm/vary@1.1.2",
+            "UID": "1739d73ff106b98c"
+          },
+          "Version": "1.1.2",
+          "Licenses": [
+            "MIT"
+          ]
+        },
+        {
+          "ID": "wrappy@1.0.2",
+          "Name": "wrappy",
+          "Identifier": {
+            "PURL": "pkg:npm/wrappy@1.0.2",
+            "UID": "571312bc97a9ff29"
+          },
+          "Version": "1.0.2",
+          "Licenses": [
+            "ISC"
+          ]
+        }
+      ],
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2026-90711",
+          "VendorIDs": [
+            "GHSA-jqcg-44mw-7w3h"
+          ],
+          "PkgID": "proxy-addr@2.0.7",
+          "PkgName": "proxy-addr",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/proxy-addr@2.0.7",
+            "UID": "58fe8731b803647"
+          },
+          "InstalledVersion": "2.0.7",
+          "FixedVersion": "2.0.8",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-90711",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:c7f313e089ae11f08cd1da79b32b5e0111f51f6e3f26715eb714e0bebdb31ee2",
+          "Title": "proxy-addr: proxy-addr vulnerable to IP spoofing via IPv4-mapped IPv6 trust subnet",
+          "Description": "proxy-addr is a Node.js module that determines a request's client address behind trusted reverse proxies, and it backs Express req.ip and req.ips. In versions 1.1.0 through 2.0.7, a trust subnet written in IPv4-mapped IPv6 notation with an IPv4-sized prefix, such as ::ffff:10.0.0.0/8 instead of the correct ::ffff:10.0.0.0/104, is accepted without error but trusts every IPv4 address on the internet rather than the block it names. Because the socket peer then becomes trusted at hop 0, any unauthenticated client can supply an arbitrary X-Forwarded-For header and control the address the application reads, which defeats IP-based access control, rate limiting, geolocation, and audit logging. This is a fail-open regression introduced in version 1.1.0. The issue is fixed in proxy-addr 2.0.8, and users should upgrade to 2.0.8 or later. As a workaround, ensure any IPv4-mapped IPv6 trust subnet uses a prefix length of at least 97, or express the range in plain IPv4 notation.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-290",
+            "CWE-348",
+            "CWE-697"
+          ],
+          "VendorSeverity": {
+            "ghsa": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 9.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-90711",
+            "https://advisory.echohq.com/cve/CVE-2026-90711",
+            "https://cna.openjsf.org/security-advisories.html",
+            "https://github.com/jshttp/proxy-addr",
+            "https://github.com/jshttp/proxy-addr/commit/780911d84d18e2c5fa008ed0c0d387631ec11965",
+            "https://github.com/jshttp/proxy-addr/releases/tag/v2.0.8",
+            "https://github.com/jshttp/proxy-addr/security/advisories/GHSA-jqcg-44mw-7w3h",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-90711",
+            "https://www.cve.org/CVERecord?id=CVE-2026-90711"
+          ],
+          "PublishedDate": "2026-09-15T07:16:33.683Z",
+          "LastModifiedDate": "2026-09-16T19:40:00.317Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+$ docker exec e3d3f3c36a4c16a86011cceea7785f5925235f5e6e6b56964fd8872ab1a009bd node -e async function check(){for(let i=0;i<30;i++){try{const r=await fetch('http://127.0.0.1:3000');if(r.status===200&&(await r.json()).message==='Hello from toy Express TypeScript app!')return;}catch{}await new Promise(r=>setTimeout(r,100));}process.exit(1)}check()

@@ -1,0 +1,77 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 279B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/3] FROM docker.io/library/node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+#4 resolve docker.io/library/node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9 0.0s done
+#4 CACHED
+
+#5 [2/3] RUN apt-get update && apt-get install -y --no-install-recommends jq     && rm -rf /var/lib/apt/lists/*
+#5 0.181 Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+#5 0.220 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#5 0.233 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#5 0.243 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9678 kB]
+#5 0.408 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [4412 B]
+#5 0.421 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [267 kB]
+#5 0.914 Fetched 10.2 MB in 1s (12.7 MB/s)
+#5 0.914 Reading package lists...
+#5 1.372 Reading package lists...
+#5 1.707 Building dependency tree...
+#5 1.814 Reading state information...
+#5 1.917 The following additional packages will be installed:
+#5 1.917   libjq1 libonig5
+#5 1.937 The following NEW packages will be installed:
+#5 1.939   jq libjq1 libonig5
+#5 1.996 0 upgraded, 3 newly installed, 0 to remove and 24 not upgraded.
+#5 1.996 Need to get 436 kB of archives.
+#5 1.996 After this operation, 1271 kB of additional disk space will be used.
+#5 1.996 Get:1 http://deb.debian.org/debian trixie/main amd64 libonig5 amd64 6.9.9-1+b1 [189 kB]
+#5 2.042 Get:2 http://deb.debian.org/debian-security trixie-security/main amd64 libjq1 amd64 1.7.1-6+deb13u4 [168 kB]
+#5 2.048 Get:3 http://deb.debian.org/debian-security trixie-security/main amd64 jq amd64 1.7.1-6+deb13u4 [78.9 kB]
+#5 2.132 debconf: unable to initialize frontend: Dialog
+#5 2.132 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#5 2.132 debconf: falling back to frontend: Readline
+#5 2.132 debconf: unable to initialize frontend: Readline
+#5 2.132 debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 3.)
+#5 2.132 debconf: falling back to frontend: Teletype
+#5 2.137 debconf: unable to initialize frontend: Teletype
+#5 2.137 debconf: (This frontend requires a controlling tty.)
+#5 2.137 debconf: falling back to frontend: Noninteractive
+#5 2.497 Fetched 436 kB in 0s (4067 kB/s)
+#5 2.514 Selecting previously unselected package libonig5:amd64.
+#5 2.514 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5024 files and directories currently installed.)
+#5 2.519 Preparing to unpack .../libonig5_6.9.9-1+b1_amd64.deb ...
+#5 2.524 Unpacking libonig5:amd64 (6.9.9-1+b1) ...
+#5 2.550 Selecting previously unselected package libjq1:amd64.
+#5 2.551 Preparing to unpack .../libjq1_1.7.1-6+deb13u4_amd64.deb ...
+#5 2.553 Unpacking libjq1:amd64 (1.7.1-6+deb13u4) ...
+#5 2.575 Selecting previously unselected package jq.
+#5 2.575 Preparing to unpack .../jq_1.7.1-6+deb13u4_amd64.deb ...
+#5 2.578 Unpacking jq (1.7.1-6+deb13u4) ...
+#5 2.599 Setting up libonig5:amd64 (6.9.9-1+b1) ...
+#5 2.606 Setting up libjq1:amd64 (1.7.1-6+deb13u4) ...
+#5 2.613 Setting up jq (1.7.1-6+deb13u4) ...
+#5 2.620 Processing triggers for libc-bin (2.41-12+deb13u3) ...
+#5 DONE 2.7s
+
+#6 [3/3] WORKDIR /work
+#6 DONE 0.0s
+
+#7 exporting to image
+#7 exporting layers 0.1s done
+#7 exporting manifest sha256:1c289b432cc8b3b0bdb9836356fe22fa1633c138c9171899989ec313cd68afb8 done
+#7 exporting config sha256:af2f4b00bdf0ea2c808a90f38410f4d90527b04984819087dd3ca7275e1c2f31 done
+#7 exporting attestation manifest sha256:618e1dabd978a8dda7e569bd251cb3f19d6a399de36cea66a44a9ea580942d0c done
+#7 exporting manifest list sha256:b0fc4904e15d3efce4bb8e6ea16bfb200177c64ff2625612114deb2d5030566f done
+#7 naming to docker.io/library/sip-benchmark-test-tools:latest done
+#7 unpacking to docker.io/library/sip-benchmark-test-tools:latest 0.0s done
+#7 DONE 0.2s

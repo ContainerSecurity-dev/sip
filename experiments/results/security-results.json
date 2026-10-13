@@ -28,16 +28,16 @@
     {
       "control": "missing-invalid-sbom",
       "expected": "Fail retrieval or structural validation",
-      "observed": "Failed as expected",
+      "observed": "Live baseline without attached SBOM rejected; malformed mocks rejected",
       "outcome": "pass",
-      "evidence": "mocked Docker"
+      "evidence": "live Docker registry plus mocked malformed fixtures"
     },
     {
       "control": "fixable-critical",
       "expected": "Release condition fails",
-      "observed": "Nonzero gate exit",
+      "observed": "All three actual hardened scans returned exit 1 for fixable Critical proxy-addr finding",
       "outcome": "pass",
-      "evidence": "mocked Trivy result, real shell gate"
+      "evidence": "real containerized Trivy 0.72.0, attached runtime SBOM"
     },
     {
       "control": "unapproved-ref",
@@ -56,9 +56,16 @@
     {
       "control": "sandbox-isolation",
       "expected": "Runtime boundary isolation",
-      "observed": "Sandboxes unavailable",
-      "outcome": "not measured",
-      "evidence": "no runtime test"
+      "observed": "Host file and environment marker inaccessible; sandbox write absent on host; HTTPS test blocked and logged",
+      "outcome": "pass",
+      "evidence": "sbx 0.48.0 runtime probes; narrow tested boundaries only"
     }
-  ]
+  ],
+  "liveFollowup": "2026-10-13",
+  "liveEvidenceDirectory": "docker-run-2",
+  "node26Tests": {
+    "passed": 12,
+    "failed": 0,
+    "log": "node26-tests-with-jq.log"
+  }
 }

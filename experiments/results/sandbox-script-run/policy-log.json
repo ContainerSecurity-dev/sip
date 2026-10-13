@@ -1,0 +1,45 @@
+{
+  "allowed": [],
+  "blocked": [
+    {
+      "sandbox_id": "sip-boundary-28860",
+      "host": "example.com:443",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 1,
+      "first_seen": "2026-10-13T22:27:32.902191181+02:00",
+      "last_seen": "2026-10-13T22:27:32.902191181+02:00"
+    },
+    {
+      "sandbox_id": "sip-boundary-28860",
+      "host": "archive.ubuntu.com:80",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:archive.ubuntu.com:80)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 3,
+      "first_seen": "2026-10-13T22:27:32.550302554+02:00",
+      "last_seen": "2026-10-13T22:27:32.551566083+02:00"
+    },
+    {
+      "sandbox_id": "sip-boundary-28860",
+      "host": "security.ubuntu.com:80",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:security.ubuntu.com:80)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 1,
+      "first_seen": "2026-10-13T22:27:32.550279314+02:00",
+      "last_seen": "2026-10-13T22:27:32.550279314+02:00"
+    },
+    {
+      "sandbox_id": "sip-boundary-28860",
+      "host": "download.docker.com:443",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:download.docker.com:443)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 1,
+      "first_seen": "2026-10-13T22:27:32.55014282+02:00",
+      "last_seen": "2026-10-13T22:27:32.55014282+02:00"
+    }
+  ]
+}

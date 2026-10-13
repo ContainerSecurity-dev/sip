@@ -1,0 +1,112 @@
+$ docker buildx build --platform linux/amd64 --no-cache --pull -f experiments/baseline/Dockerfile --metadata-file /home/mohammad-ali/.codex/visualizations/2026/10/13/01a136cd-20cf-77c2-b98e-2853aaaa07df/sip-node-case-study/experiments/results/docker-run-2/baseline-2/build.json --tag localhost:5000/sip-benchmark:baseline-1791922955915 --build-arg BASE_IMAGE=node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9 --sbom=false --provenance=false --output type=image,push=true,oci-mediatypes=true,oci-artifact=true .
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 523B done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 0.6s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e done
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 91B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [build 1/7] FROM docker.io/library/node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+#7 resolve docker.io/library/node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9 0.0s done
+#7 DONE 0.0s
+
+#8 [build 2/7] WORKDIR /app
+#8 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 160B done
+#6 DONE 0.0s
+
+#9 [build 3/7] COPY package.json package-lock.json ./
+#9 DONE 0.0s
+
+#10 [build 4/7] RUN npm ci
+#10 0.692 npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+#10 0.804 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#10 0.830 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#10 1.501 
+#10 1.501 added 138 packages, and audited 139 packages in 1s
+#10 1.501 
+#10 1.501 34 packages are looking for funding
+#10 1.501   run `npm fund` for details
+#10 1.506 
+#10 1.506 6 vulnerabilities (1 moderate, 4 high, 1 critical)
+#10 1.506 
+#10 1.506 To address issues that do not require attention, run:
+#10 1.506   npm audit fix
+#10 1.506 
+#10 1.506 Some issues need review, and may require choosing
+#10 1.506 a different dependency.
+#10 1.506 
+#10 1.506 Run `npm audit` for details.
+#10 1.508 npm notice
+#10 1.508 npm notice New major version of npm available! 11.16.0 -> 12.2.0
+#10 1.508 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#10 1.508 npm notice To update run: npm install -g npm@12.2.0
+#10 1.508 npm notice
+#10 DONE 1.6s
+
+#11 [build 5/7] COPY tsconfig.json ./
+#11 DONE 0.0s
+
+#12 [build 6/7] COPY src ./src
+#12 DONE 0.0s
+
+#13 [build 7/7] RUN npm run build && npm prune --omit=dev
+#13 0.189 
+#13 0.189 > sip@1.0.0 build
+#13 0.189 > tsc
+#13 0.189 
+#13 2.896 
+#13 2.896 removed 71 packages, and audited 68 packages in 3s
+#13 2.896 
+#13 2.896 26 packages are looking for funding
+#13 2.896   run `npm fund` for details
+#13 2.898 
+#13 2.898 2 vulnerabilities (1 moderate, 1 critical)
+#13 2.898 
+#13 2.898 To address all issues, run:
+#13 2.898   npm audit fix
+#13 2.898 
+#13 2.898 Run `npm audit` for details.
+#13 DONE 2.9s
+
+#14 [runtime 3/5] COPY --from=build /app/package.json ./package.json
+#14 DONE 0.0s
+
+#15 [runtime 4/5] COPY --from=build /app/node_modules ./node_modules
+#15 DONE 0.1s
+
+#16 [runtime 5/5] COPY --from=build /app/dist ./dist
+#16 DONE 0.0s
+
+#17 exporting to image
+#17 exporting layers 0.1s done
+#17 exporting manifest sha256:1494a7138dc3d21620e053c63d2dfb8c97bdf1854c8b00c01e742fc4989bef3f done
+#17 exporting config sha256:0d0ec61f80f0240818b64790e5b6f9b358b952ef13cbe4148416ae4bc3e2b46c done
+#17 naming to localhost:5000/sip-benchmark:baseline-1791922955915 done
+#17 unpacking to localhost:5000/sip-benchmark:baseline-1791922955915 0.1s done
+#17 pushing layers
+#17 pushing layers 0.6s done
+#17 pushing manifest for localhost:5000/sip-benchmark:baseline-1791922955915@sha256:1494a7138dc3d21620e053c63d2dfb8c97bdf1854c8b00c01e742fc4989bef3f
+#17 pushing manifest for localhost:5000/sip-benchmark:baseline-1791922955915@sha256:1494a7138dc3d21620e053c63d2dfb8c97bdf1854c8b00c01e742fc4989bef3f 0.0s done
+#17 DONE 0.9s
+
+#18 resolving provenance for metadata file
+#18 DONE 0.0s

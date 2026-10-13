@@ -1,0 +1,219 @@
+{
+  "recordedAt": "2026-10-13T20:21:07.835Z",
+  "platform": "linux/amd64",
+  "cache": "no-cache; warm base downloads possible",
+  "source": "549e116f2c260793cae9816916894c83431b9e49",
+  "tools": {
+    "node": {
+      "stdout": "v22.22.3",
+      "status": 0,
+      "seconds": 0.004660847,
+      "log": "003-node.log"
+    },
+    "npm": {
+      "stdout": "11.14.1",
+      "status": 0,
+      "seconds": 0.049985261,
+      "log": "004-npm.log"
+    },
+    "docker": {
+      "stdout": "Client: Docker Engine - Community\n Version:           29.5.3\n API version:       1.54\n Go version:        go1.26.4\n Git commit:        d1c06ef\n Built:             Wed Jun  3 18:00:12 2026\n OS/Arch:           linux/amd64\n Context:           desktop-linux\n\nServer: Docker Desktop 4.95.0 (242831)\n Engine:\n  Version:          29.8.2\n  API version:      1.56 (minimum version 1.40)\n  Go version:       go1.26.8\n  Git commit:       8af9fe3\n  Built:            Wed Sep 30 19:32:25 2026\n  OS/Arch:          linux/amd64\n  Experimental:     false\n containerd:\n  Version:          v2.3.6\n  GitCommit:        ee2735368117d2eb259779949d5e75cdafec9761\n runc:\n  Version:          1.5.1\n  GitCommit:        v1.5.1-0-g8f2685a4\n docker-init:\n  Version:          0.19.0\n  GitCommit:        de40ad0",
+      "status": 0,
+      "seconds": 0.028644038999999993,
+      "log": "005-docker.log"
+    },
+    "buildx": {
+      "stdout": "github.com/docker/buildx v0.37.2 2d379c0c3f22da0d2759d132a0ec81ca949098f0",
+      "status": 0,
+      "seconds": 0.04328528700000001,
+      "log": "006-docker.log"
+    },
+    "trivy": {
+      "stdout": "Version: 0.72.0",
+      "status": 0,
+      "seconds": 0.21340213500000002,
+      "log": "007-docker.log"
+    },
+    "kernel": {
+      "stdout": "Linux stealth 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2 x86_64 x86_64 x86_64 GNU/Linux",
+      "status": 0,
+      "seconds": 0.002282598000000007,
+      "log": "008-uname.log"
+    }
+  },
+  "runs": [
+    {
+      "iteration": 1,
+      "variant": "baseline",
+      "completeCiSeconds": null,
+      "status": "measured",
+      "buildSeconds": 12.107656560000002,
+      "digest": "sha256:fdbd9468bc2cceee6a8de13c3f71aa21f8da8dd0ccc2c22aadf95cff5acfa0b7",
+      "sbomAvailable": false,
+      "provenanceAvailable": false,
+      "compressedLayerBytes": 85020788,
+      "localImageBytes": 352869992,
+      "runtimeNode": "v26.3.0",
+      "functionalCheck": "pass",
+      "cves": {
+        "CRITICAL": 5,
+        "HIGH": 97,
+        "MEDIUM": 147,
+        "LOW": 90,
+        "UNKNOWN": 3
+      },
+      "harnessSeconds": 14.839055208999998
+    },
+    {
+      "iteration": 1,
+      "variant": "hardened",
+      "completeCiSeconds": null,
+      "status": "measured",
+      "dependencyVerificationSeconds": 3.4764998960000013,
+      "buildSeconds": 25.598124482,
+      "digest": "sha256:b9d9927e02580c1620d8396408aa580e87d87947827494ff451e1e9a3a81d4a9",
+      "sbomAvailable": true,
+      "provenanceAvailable": true,
+      "compressedLayerBytes": 42957626,
+      "localImageBytes": 191693726,
+      "runtimeNode": "v26.3.0",
+      "functionalCheck": "pass",
+      "cves": {
+        "CRITICAL": 1,
+        "HIGH": 6,
+        "MEDIUM": 61,
+        "LOW": 44,
+        "UNKNOWN": 0
+      },
+      "gateExitCode": 1,
+      "securityVerificationSeconds": 0.4114296000000031,
+      "harnessSeconds": 32.147187715
+    },
+    {
+      "iteration": 2,
+      "variant": "hardened",
+      "completeCiSeconds": null,
+      "status": "measured",
+      "dependencyVerificationSeconds": 2.851861333000008,
+      "buildSeconds": 13.899418712,
+      "digest": "sha256:727a790fc4de1686b779684e21c94345f8f5a0f10732fc3a25e4313845650c83",
+      "sbomAvailable": true,
+      "provenanceAvailable": true,
+      "compressedLayerBytes": 42957658,
+      "localImageBytes": 191693758,
+      "runtimeNode": "v26.3.0",
+      "functionalCheck": "pass",
+      "cves": {
+        "CRITICAL": 1,
+        "HIGH": 6,
+        "MEDIUM": 61,
+        "LOW": 44,
+        "UNKNOWN": 0
+      },
+      "gateExitCode": 1,
+      "securityVerificationSeconds": 0.39631741899999906,
+      "harnessSeconds": 19.532140268999996
+    },
+    {
+      "iteration": 2,
+      "variant": "baseline",
+      "completeCiSeconds": null,
+      "status": "measured",
+      "buildSeconds": 6.414647690999991,
+      "digest": "sha256:1494a7138dc3d21620e053c63d2dfb8c97bdf1854c8b00c01e742fc4989bef3f",
+      "sbomAvailable": false,
+      "provenanceAvailable": false,
+      "compressedLayerBytes": 85020680,
+      "localImageBytes": 352869885,
+      "runtimeNode": "v26.3.0",
+      "functionalCheck": "pass",
+      "cves": {
+        "CRITICAL": 5,
+        "HIGH": 97,
+        "MEDIUM": 147,
+        "LOW": 90,
+        "UNKNOWN": 3
+      },
+      "harnessSeconds": 8.290631322999994
+    },
+    {
+      "iteration": 3,
+      "variant": "baseline",
+      "completeCiSeconds": null,
+      "status": "measured",
+      "buildSeconds": 6.191644926000008,
+      "digest": "sha256:5aa63f3e446000877d49cdb903cae80fc5282435e71b5dfd936caf6d5f9a6e3c",
+      "sbomAvailable": false,
+      "provenanceAvailable": false,
+      "compressedLayerBytes": 85020669,
+      "localImageBytes": 352869871,
+      "runtimeNode": "v26.3.0",
+      "functionalCheck": "pass",
+      "cves": {
+        "CRITICAL": 5,
+        "HIGH": 97,
+        "MEDIUM": 147,
+        "LOW": 90,
+        "UNKNOWN": 3
+      },
+      "harnessSeconds": 8.020097211
+    },
+    {
+      "iteration": 3,
+      "variant": "hardened",
+      "completeCiSeconds": null,
+      "status": "measured",
+      "dependencyVerificationSeconds": 3.188475015999997,
+      "buildSeconds": 13.733153649999993,
+      "digest": "sha256:fa09c2dd311a88167a51d302ae1c521479e8ce0e9e933fad41191e1e8fc4c2c5",
+      "sbomAvailable": true,
+      "provenanceAvailable": true,
+      "compressedLayerBytes": 42957625,
+      "localImageBytes": 191693725,
+      "runtimeNode": "v26.3.0",
+      "functionalCheck": "pass",
+      "cves": {
+        "CRITICAL": 1,
+        "HIGH": 6,
+        "MEDIUM": 61,
+        "LOW": 44,
+        "UNKNOWN": 0
+      },
+      "gateExitCode": 1,
+      "securityVerificationSeconds": 0.42748606100000325,
+      "harnessSeconds": 19.701738037999995
+    }
+  ],
+  "status": "complete",
+  "limitations": [
+    "Wall-clock build includes push and, for SIP, attestations.",
+    "Repeated no-cache builds are not guaranteed bit-for-bit reproducible; compare recorded digests.",
+    "Local harness duration is not complete GitHub Actions pipeline duration.",
+    "Runtime image scans provide like-for-like CVE counts; attached SBOM gate has potentially broader scope."
+  ],
+  "dirty": true,
+  "bases": {
+    "baseline": "node:26.3.0-trixie-slim@sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9",
+    "build": "dhi.io/node:26.3.0-debian13-dev@sha256:c728b507f13a8fc9510cc1ae64359b2d047584f7bf1c643e2d2a524881becd88",
+    "runtime": "dhi.io/node:26.3.0-debian13@sha256:21aa1fb7f270f414650ad70ab5b7bff5952d3a4b0f612305089927f652d2b8a6"
+  },
+  "trivyImage": "aquasec/trivy:0.72.0@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f",
+  "vulnerabilityDatabase": {
+    "Version": 2,
+    "NextUpdate": "2026-10-14T19:11:46.909501616Z",
+    "UpdatedAt": "2026-10-13T19:11:46.909502157Z",
+    "DownloadedAt": "2026-10-13T20:21:29.355003421Z"
+  },
+  "medians": {
+    "baseline": {
+      "buildSeconds": 6.414647690999991,
+      "securityVerificationSeconds": null,
+      "harnessSeconds": 8.290631322999994
+    },
+    "hardened": {
+      "buildSeconds": 13.899418712,
+      "securityVerificationSeconds": 0.4114296000000031,
+      "harnessSeconds": 19.701738037999995
+    }
+  }
+}

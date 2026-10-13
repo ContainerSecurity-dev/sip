@@ -1,0 +1,45 @@
+{
+  "allowed": [],
+  "blocked": [
+    {
+      "sandbox_id": "sip-benchmark-isolation",
+      "host": "archive.ubuntu.com:80",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:archive.ubuntu.com:80)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 6,
+      "first_seen": "2026-10-13T22:20:56.644571676+02:00",
+      "last_seen": "2026-10-13T22:21:35.740701957+02:00"
+    },
+    {
+      "sandbox_id": "sip-benchmark-isolation",
+      "host": "security.ubuntu.com:80",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:security.ubuntu.com:80)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 2,
+      "first_seen": "2026-10-13T22:20:56.64459392+02:00",
+      "last_seen": "2026-10-13T22:21:35.739839531+02:00"
+    },
+    {
+      "sandbox_id": "sip-benchmark-isolation",
+      "host": "download.docker.com:443",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:download.docker.com:443)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 2,
+      "first_seen": "2026-10-13T22:20:56.644702152+02:00",
+      "last_seen": "2026-10-13T22:21:35.739789596+02:00"
+    },
+    {
+      "sandbox_id": "sip-benchmark-isolation",
+      "host": "example.com:443",
+      "proxy_type": "forward",
+      "rule": "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)",
+      "reason": "No matching allow rule (default deny)",
+      "count": 1,
+      "first_seen": "2026-10-13T22:21:35.72566431+02:00",
+      "last_seen": "2026-10-13T22:21:35.72566431+02:00"
+    }
+  ]
+}

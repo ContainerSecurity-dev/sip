@@ -1,0 +1,46 @@
+{
+  "baseline": {
+    "compressedLayerBytes": 85020680,
+    "localImageBytes": 352869885,
+    "buildSeconds": 6.414647690999991,
+    "securityVerificationSeconds": null,
+    "dependencyVerificationSeconds": null,
+    "harnessSeconds": 8.290631322999994,
+    "cves": {
+      "CRITICAL": 5,
+      "HIGH": 97,
+      "MEDIUM": 147,
+      "LOW": 90,
+      "UNKNOWN": 3
+    },
+    "stableCveCounts": true,
+    "uniqueIndexDigests": 3,
+    "gateExitCodes": [
+      null,
+      null,
+      null
+    ]
+  },
+  "hardened": {
+    "compressedLayerBytes": 42957626,
+    "localImageBytes": 191693726,
+    "buildSeconds": 13.899418712,
+    "securityVerificationSeconds": 0.4114296000000031,
+    "dependencyVerificationSeconds": 3.188475015999997,
+    "harnessSeconds": 19.701738037999995,
+    "cves": {
+      "CRITICAL": 1,
+      "HIGH": 6,
+      "MEDIUM": 61,
+      "LOW": 44,
+      "UNKNOWN": 0
+    },
+    "stableCveCounts": true,
+    "uniqueIndexDigests": 3,
+    "gateExitCodes": [
+      1,
+      1,
+      1
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+
+SANDBOX
+  Name:       sip-boundary-28860
+  Agent:      shell
+  Workspace:  none · no workspace bind mount
+  Image:      docker/sandbox-templates:shell-docker
+  CPU:        22
+  Memory:     15.4 GiB
+
+IMAGE
+  ○ image — pulling…
+      1560168ac5fb already present
+      6a42a4149724 already present
+      5bbe8539825f already present
+      fdc1c83df86c already present
+      b2c007bbb5dc already present
+      84e55b2a5e0b already present
+      cc5f104d36e3 already present
+  ✓ image — ready
+
+  ✓ Created sandbox sip-boundary-28860

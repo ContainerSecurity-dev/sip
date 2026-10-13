@@ -1,0 +1,4 @@
+$ docker run --rm --user 1000:1000 --network container:sip-benchmark-registry --mount type=bind,src=/tmp/sip-node-case-study,dst=/tmp/sip-node-case-study --mount type=bind,src=/tmp/sip-benchmark-trivy-cache,dst=/tmp/sip-benchmark-trivy-cache -w /tmp/sip-node-case-study aquasec/trivy:0.72.0@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f --version
+docker: Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /tmp/sip-node-case-study
+
+Run 'docker run --help' for more information

@@ -1,0 +1,2 @@
+$ docker buildx imagetools inspect node:26.3.0-trixie-slim --format {{json .Manifest.Digest}}
+"sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9"

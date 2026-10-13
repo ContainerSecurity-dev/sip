@@ -1,127 +1,173 @@
 # SIP Node.js experimental report
 
-Evidence collection date: 2026-10-13 (Europe/Berlin). Raw timestamps use UTC.
+Measured on 2026-10-13 (Europe/Berlin); raw timestamps are UTC unless noted.
 Reference commit: `4ab400eaa9db740ea7aef72a33efa5ac6e68745f`.
 Skill reference: `5888d6d6e562654c919cde0c21023e2db473407d`.
 Branch: `case-study/node-sip-benchmark`.
 
-## Findings and limits
+## Main finding
 
-The application compiled and all 12 Node test cases passed. Live validation
-accepted 158 locked package entries under the five-day policy with no
-exclusions. These entries include optional packages; they are not a count of
-packages shipped in the runtime image. Node was 22.22.3, npm 11.14.1, Docker
-client 29.5.3 and Buildx 0.37.2 on Linux x86_64. The Docker desktop-linux socket
-was missing even outside the execution sandbox. Trivy and `sbx` were absent.
-Container Node 26.3.0 was not executed. The preflight recorded these facts in
-`experiments/results/environment/`.
+Three builds per variant completed and all six application probes passed.
+The hardened images were smaller and had fewer detected vulnerabilities, but
+**all three attached-SBOM gates failed** on a fixable Critical vulnerability in
+`proxy-addr`. No benchmark candidate was promoted. A smaller hardened base did
+not repair a vulnerable application dependency.
 
-| Requested metric | Baseline | SIP |
-| --- | --- | --- |
-| Compressed registry layer bytes | Not measured | Not measured |
-| Local image bytes | Not measured | Not measured |
-| Critical / High / Medium / Low image CVEs | Not measured | Not measured |
-| Container build duration | Not measured | Not measured |
-| Complete CI duration | Not measured | Not measured |
-| Security verification duration | N/A (no gate) | Not measured |
-| Attached SBOM availability | Not measured | Not measured |
-| Attached provenance availability | Not measured | Not measured |
-| Bit-for-bit rebuild reproducibility | Not measured | Not measured |
+Both images ran Node 26.3.0 on Debian 13, linux/amd64. Both build environments
+used npm 11.16.0. Baseline ran as UID 0 with a shell and npm. Hardened ran as UID
+1000 without `/bin/sh` or npm. Docker client was 29.5.3, server 29.8.2 (Docker
+Desktop 4.95.0), Buildx 0.37.2, BuildKit 0.33.1, Trivy 0.72.0. The host controller
+used Node 22.22.3/npm 11.14.1. Docker Sandboxes was 0.48.0.
 
-No image digests, scanner DB update time, median build duration or container
-savings are available. The preflight tool-call durations are not benchmark
-measurements. `npm-audit.json` reports six dependency vulnerability entries:
-one Critical, four High and one Moderate. This audit includes development
-dependencies, is not a Trivy scan, and cannot establish the container gate's
-outcome. The existing dependency graph was retained to avoid confounding the
-comparison. Resolve/audit its findings before making a production-readiness claim.
+Earlier preflight failures are preserved in `environment/` and `docker-run/`.
+The initial Docker socket was unavailable; it subsequently became available.
+The first containerized Trivy attempt failed because Docker Desktop could not
+mount the host `/tmp` checkout. Moving the checkout to a shared home directory
+resolved this. The completed measurements are in `docker-run-2/`; earlier
+failures are not included in medians.
 
-## Changes
+## Measured comparison
 
-Reused the skill validator and its tests. Age exclusions now skip only age
-checking; registry tarball URL and integrity comparisons still run. Metadata
-requests have bounded retries and timeouts. Await JSON parsing inside the retry
-block so asynchronous body failures also receive bounded retries. The CLI
-retains the reference's fixed five-day minimum rather than introducing an
-environment-variable bypass. Public npm is the only supported registry; this
-is not a general workspace/private-registry validator. Linked or versionless
-entries are skipped by the reused collector, so unsupported lockfile sources
-need an explicit policy before broader adoption.
+| Metric | Baseline | SIP |
+| --- | ---: | ---: |
+| Median compressed runtime-layer bytes | 85,020,680 | 42,957,626 |
+| Median local image bytes (`docker image inspect .Size`) | 352,869,885 | 191,693,726 |
+| Critical findings | 5 | 1 |
+| High findings | 97 | 6 |
+| Medium findings | 147 | 61 |
+| Low findings | 90 | 44 |
+| Unknown-severity findings | 3 | 0 |
+| Median build + push seconds | 6.41465 | 13.89942 |
+| Median lockfile verification seconds | N/A | 3.18848 |
+| Median attached-SBOM retrieval + gate scan seconds | N/A | 0.41143 |
+| Median local harness seconds | 8.29063 | 19.70174 |
+| Complete hosted CI pipeline seconds | Not measured | Not measured |
+| Attached SBOM / provenance | Absent / absent | Present / present |
+| Repeated index digest identity | Different in all three | Different in all three |
 
-The application exports its Express instance for HTTP tests without changing
-its response or startup behavior. `npm test` replaces the original placeholder.
-No feature, dependency version, root Dockerfile, or release workflow changed.
-The optional promotion helper is experimental and is tested with a fake Docker
-CLI, not against a live registry.
+MB in the blog means 1,000,000 bytes. Local `.Size` is Docker's reported size,
+not a measurement of unpacked-only bytes, incremental disk use or transfer
+cost. Compressed size sums the selected platform's layer descriptors, excluding
+config, manifest/index and attestation objects. Sizes varied slightly across
+runs; the table reports medians. CVE counts were stable across all repetitions.
 
-## Boundary tests
+Trivy's DB `UpdatedAt` was `2026-10-13T19:11:46.909502157Z`, downloaded at
+`2026-10-13T20:21:29.355003421Z`. Subsequent scans used `--skip-db-update`.
+Runtime image scans include unfixed findings, all severities and finding
+occurrences rather than deduplicated CVE IDs. The SIP gate instead scans the
+attached runtime SBOM, filters to fixable Critical findings and exits 1. Its
+recorded finding is `CVE-2026-90711`, package `proxy-addr`, fix version `2.0.8`.
+This is a scanner observation from that DB snapshot, not independent exploit
+validation. npm audit is separate and must not be used as container scan data.
 
-| Boundary | Expected | Observed | Outcome and evidence class |
+Alternating order was baseline/SIP, SIP/baseline, baseline/SIP. Builds used
+`--no-cache --pull`, fixed base digests, identical source and a local registry.
+Base downloads, network and host caches were not reset. The first pair includes
+more setup/pull overhead; no samples were discarded. Timings include push and,
+for SIP, attestations. They do not isolate DHI, SBOM or provenance overhead.
+The harness adds diagnostic runtime scans to both paths and is not a CI pipeline.
+No new hosted workflow was dispatched, so complete CI duration remains unmeasured.
+
+A supplemental single-pair harness validation is retained in `harness-validation/`
+and excluded from the comparison medians. It verifies the updated image-tag
+recording and scanner-error checks.
+
+## Artifact and source identity
+
+`docker-run-2/results.json` records all six candidate digests and base digests.
+Build tags are also present in raw build logs and per-run `build.json` files.
+`summary.json` contains the medians. `measured-sources.json` hashes source,
+lockfile, Dockerfiles, validator and the exact harness snapshot used for the run.
+The controller ran from commit `549e116f2c260793cae9816916894c83431b9e49`
+with recorded working-tree changes. `benchmark-source.mjs` preserves that
+measurement version; subsequent harness improvements do not rewrite old results.
+
+Trivy image:
+`aquasec/trivy:0.72.0@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f`.
+
+Local registry tags are disposable; raw manifests, scans and attestations are
+retained as evidence, including after cleanup. Large raw files are losslessly
+gzip-compressed. Use `gzip -dc FILE.json.gz` to inspect them. Rebuilding can yield
+different indexes, platform manifests and layer sizes; bit-for-bit reproducibility
+was not achieved and its sources of variation were not isolated.
+
+## Security verification
+
+| Boundary | Expected | Observed | Evidence |
 | --- | --- | --- | --- |
-| Recent dependency | Reject a four-day-old fixture | Validator rejects | Pass, mocked registry |
-| Exact age threshold | Accept a five-day-old fixture | Validator accepts | Pass, mocked clock/registry |
-| Lifecycle script | Marker absent with ignore-scripts | Absent; present with explicit enablement | Pass, real npm/local tarball |
-| Tampered lockfile | Reject altered integrity/URL | Validator rejects; npm rejects bad tarball integrity | Pass, mocked metadata plus real npm |
-| Missing/invalid SBOM | Stop before scan | null, empty, malformed JSON and CLI failure reject | Pass, mocked Docker |
-| Fixable Critical finding | Release gate exits nonzero | Fixture count makes workflow gate fail | Pass, mocked Trivy output, not scanner detection |
-| Ineligible release ref | Reject feature branch/non-v tag | Nonzero; promotion Docker never invoked | Pass, real shell policy |
-| Digest identity | Promote verified digest; reject mismatch | Correct argument and equality check | Pass, mocked Docker; live promotion Not measured |
-| Agent isolation | Isolate host resources | No Sandboxes runtime | Not measured |
+| Recent dependency | Reject four-day-old fixture | Rejected; exact five-day threshold accepted | Mock registry/clock, passing unit tests |
+| Lifecycle script | No marker with scripts disabled | Absent; positive control writes marker | Real npm/local tarball |
+| Tampered lockfile | Reject wrong URL/integrity | Rejected | Mock metadata plus real npm integrity failure |
+| Missing/invalid SBOM | Stop before scanner | Live baseline rejected; malformed fixtures rejected | `missing-sbom-test.json`, tests |
+| Fixable Critical | Prevent release | All real hardened scans exited 1 | Three `gate.json` files |
+| Ineligible release ref | Reject feature/non-v refs | Rejected before Docker invocation | Real shell policy tests |
+| Candidate/release digest | Preserve verified identity | Mock checks passed; live promotion not attempted after failed gate | Tests; no release claim |
+| Sandbox file/environment isolation | Host-only markers unavailable | Unavailable; sandbox writes absent on host | `sandbox/probes.txt` |
+| Sandbox network isolation | Deny test domain | HTTP 403, curl --fail exit 22; policy log says default deny | Sandbox runtime and policy logs |
+| Sandbox Docker separation | Host registry container invisible | Separate daemon 29.8.1; host container not found | Sandbox runtime logs |
 
-`tests.tap` is the raw test output. `security-results.json` provides structured
-outcomes. The SPDX shell check is a minimal structural guard, not full schema
-validation, authenticated provenance, or proof of inventory completeness.
-The fixture tests establish control flow, not end-to-end registry behavior.
+All 12 tests passed on host Node 22 and on container Node 26.3.0. The first
+Node 26 test attempt lacked jq, which the shell tests need. A separate test-only
+image supplies jq; `node26-tests-with-jq.log` records the successful run.
+Application response and unknown-route behavior are tested. Live registry
+validation accepted 158 locked entries with zero age exclusions; entries include
+optional dependencies, not just shipped runtime packages.
 
-## Historical review and current implementation
+Sandboxes initially had no global policy and no existing sandboxes. The run
+initialized deny-all, then created a workspace-free shell sandbox with shared
+skills disabled. It did not run an AI agent or mount production credentials.
+These controlled probes verify selected observed boundaries, not resistance to
+all escapes, credential-proxy behavior or CI sandboxing. The reproducible probe
+script requires a deny-all test installation and leaves global policy untouched.
 
-Raw public PR #2 reviews/comments and workflow-run metadata are preserved under
-`experiments/results/historical-*`. They corroborate the repository's existing
-`docs/pr-2-review-comparison.md`. Qodo identified lockfile cooldown bypass and
-best-effort SBOM retrieval. Copilot independently identified SBOM fallback and
-also flagged unsupported npm, manual ref eligibility and promotion races.
+## Engineering changes and remaining gaps
 
-Current source at the reference commit validates lockfile metadata before
-installation, extracts `.SBOM.SPDX` from the candidate digest, scans that file,
-checks manual refs, and uses ref-scoped cancellation. Dependency and image jobs
-check out the same candidate SHA. Promotion depends on successful vulnerability
-verification and uses the build's digest rather than rebuilding. This was
-verified by source inspection, not by a new production release.
+Reused the SIP skill's validator/tests: age exclusions no longer skip artifact
+URL/integrity checks, and registry requests have bounded retries/timeouts. JSON
+body failures are awaited inside the retry block. The CLI retains the fixed
+five-day policy. Public npm is the supported source; linked/versionless entries
+are skipped by the reused collector, so broader workspace/private-source
+policies require further work.
 
-The review document's description of pinning npm 11.10.0 is historical: current
-CI pins Node 26.3.0 and does not separately install that npm version. Ref-scoped
-cancellation mitigates overlap but is not a transactional registry lock. A
-cancellation can race an already-issued registry write. Environment protection
-settings and branch/tag governance have not been audited here.
+The Express app is exported for HTTP tests; startup and response behavior are
+preserved. The placeholder npm test was replaced. Root Dockerfile, dependency
+versions and production release workflow remain unchanged. Hardened experimental
+Dockerfile adds only base-image ARGs for digest pinning. The optional promotion
+helper adds a post-write digest comparison but is not wired into production.
 
-A successful historical run exists at
-https://github.com/ContainerSecurity-dev/sip/actions/runs/31799964519
-for the reference commit. Earlier success and failure records are in the raw
-JSON. No historical elapsed time or result is counted as a fresh benchmark.
+The runtime SBOM contained 99 package entries. Its additional build-stage SBOM
+contained 426; neither contained TypeScript after pruning. The existing scanner
+passes only `.SBOM.SPDX`, not `.AdditionalSPDXs`, to Trivy. Build-stage evidence
+therefore does not imply build-stage gate coverage. The minimal SPDX guard is
+not full schema validation, authenticated provenance or inventory-completeness
+proof. Broader evidence coverage needs a deliberate follow-up.
 
-## Reproduction and publication blockers
+## Historical evidence and publication scope
 
-See `experiments/README.md`. Benchmark scripts pass syntax checks and preflight;
-container portions are not runtime-validated. The harness pins base digests,
-uses matched source and intended Node/distribution versions, alternates order,
-records a fixed vulnerability DB snapshot, separates runtime scans from the
-SBOM gate and produces medians only for completed runs.
+Public PR #2 reviews/comments and historical runs remain in `historical-*`.
+Qodo identified cooldown bypass and best-effort SBOM retrieval. Copilot also
+flagged npm compatibility, manual release eligibility and promotion races.
+Current source uses explicit validation, separate SBOM extraction, ref checking,
+ref-scoped cancellation, the same source SHA for dependency/build jobs and
+promotion from the candidate digest. Historical results are not fresh timings.
+The old review document's npm 11.10.0 installation is historical; current CI pins
+Node 26.3.0 instead. Cancellation is not a transactional registry lock, and
+repository/environment approval settings were not audited.
 
-Before publication as a measured container comparison: execute the harness,
-confirm both images' OS/Node/npm/user/entrypoint behavior, inspect SBOM coverage
-(including whether pruned development packages remain represented), test real
-attestation retrieval and promotion, gather equivalent CI runs, and rerun tests
-on Node 26.3.0. Record sandbox isolation only if tested. The blog is written as
-an editorial entry with these limitations visible; it is not a finished
-quantitative performance case study.
+The blog now supports a measured local comparison and a real failed security
+gate. Remaining unmeasured items are full hosted CI duration and successful
+live release promotion. A green-release claim requires remediating the recorded
+dependency finding and rerunning the same gate; it must not be bypassed to finish
+a benchmark. Claims of complete build-time dependency scanning remain unsupported.
 
-## Claim-to-evidence map
+## Claim map
 
-- Twelve passing tests: `experiments/results/tests.tap`.
-- Five-day policy, four-day fixture, exact boundary: validator and test source.
-- 158 locked entries / zero exclusions: `live-lockfile-validation.log`.
-- Six audit entries and severity breakdown: `npm-audit.json` metadata.
-- Host/tool versions and absent Docker daemon: `environment/results.json` and logs.
-- Node 26.3.0 / Debian 13: configured Dockerfile tags, not runtime measurements.
-- Historical engineering findings: PR #2 comments and review comparison.
-- All container performance/CVE/attestation availability claims: Not measured.
+- Sizes, durations, CVEs, digests: `docker-run-2/results.json`, `summary.json`, raw scans.
+- Actual OS/UID/shell/npm: `runtime-environment.json`, `hardened-build-npm.txt`.
+- SBOM coverage: `sbom-coverage.json` and raw `sbom.json`.
+- Gate rejection: per-run `gate.json`, scan logs, `missing-sbom-test.json`.
+- Tests: `tests.tap`, `node26-tests-with-jq.log`.
+- 158 entries: `live-lockfile-validation.log`.
+- Audit findings: `npm-audit.json` (not a container measurement).
+- Sandbox boundaries: `sandbox/` and `sandbox-script-run/`.
+- Broader history: PR #2 review and raw public GitHub metadata.
