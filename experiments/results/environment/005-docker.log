@@ -1,0 +1,11 @@
+$ docker version
+Client: Docker Engine - Community
+ Version:           29.5.3
+ API version:       1.54
+ Go version:        go1.26.4
+ Git commit:        d1c06ef
+ Built:             Wed Jun  3 18:00:12 2026
+ OS/Arch:           linux/amd64
+ Context:           desktop-linux
+failed to connect to the docker API at unix:///home/mohammad-ali/.docker/desktop/docker.sock; check if the path is correct and if the daemon is running: dial unix /home/mohammad-ali/.docker/desktop/docker.sock: connect: no such file or directory
+

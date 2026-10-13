@@ -1,0 +1,90 @@
+
+> sip@1.0.0 test
+> npm run build && node --test scripts/*.test.mjs tests/*.test.mjs
+
+
+> sip@1.0.0 build
+> tsc
+
+TAP version 13
+# Subtest: minimum age must be a complete positive integer
+ok 1 - minimum age must be a complete positive integer
+  ---
+  duration_ms: 0.768421
+  type: 'test'
+  ...
+# Subtest: legacy and empty lockfiles fail closed
+ok 2 - legacy and empty lockfiles fail closed
+  ---
+  duration_ms: 0.164054
+  type: 'test'
+  ...
+# Subtest: validates publication time and registry artifact identity
+ok 3 - validates publication time and registry artifact identity
+  ---
+  duration_ms: 2.551273
+  type: 'test'
+  ...
+# Subtest: exact npmrc exclusions bypass only publication-age validation
+ok 4 - exact npmrc exclusions bypass only publication-age validation
+  ---
+  duration_ms: 0.28659
+  type: 'test'
+  ...
+# Subtest: transient registry failures receive bounded retries
+ok 5 - transient registry failures receive bounded retries
+  ---
+  duration_ms: 251.023357
+  type: 'test'
+  ...
+# Subtest: stalled registry requests time out and fail closed
+ok 6 - stalled registry requests time out and fail closed
+  ---
+  duration_ms: 5.704741
+  type: 'test'
+  ...
+# Subtest: Express serves the expected JSON and rejects unknown routes
+ok 7 - Express serves the expected JSON and rejects unknown routes
+  ---
+  duration_ms: 29.85546
+  type: 'test'
+  ...
+# Subtest: missing, empty and malformed attached SBOMs fail closed; valid fixture succeeds
+ok 8 - missing, empty and malformed attached SBOMs fail closed; valid fixture succeeds
+  ---
+  duration_ms: 38.011732
+  type: 'test'
+  ...
+# Subtest: Critical scanner fixture fails workflow gate; clean fixture passes
+ok 9 - Critical scanner fixture fails workflow gate; clean fixture passes
+  ---
+  duration_ms: 15.647699
+  type: 'test'
+  ...
+# Subtest: release refs reject feature branches and non-release tags
+ok 10 - release refs reject feature branches and non-release tags
+  ---
+  duration_ms: 9.216826
+  type: 'test'
+  ...
+# Subtest: promotion uses verified digest and checks resulting tag; unauthorized refs never invoke Docker
+ok 11 - promotion uses verified digest and checks resulting tag; unauthorized refs never invoke Docker
+  ---
+  duration_ms: 27.293989
+  type: 'test'
+  ...
+# Subtest: npm ci --ignore-scripts prevents a harmless dependency lifecycle marker
+ok 12 - npm ci --ignore-scripts prevents a harmless dependency lifecycle marker
+  ---
+  duration_ms: 903.338105
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1046.597197

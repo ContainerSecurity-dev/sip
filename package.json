@@ -4,10 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"No tests configured\"",
+    "test": "npm run build && node --test scripts/*.test.mjs tests/*.test.mjs",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "lint": "node experiments/scripts/check-syntax.mjs"
   },
   "repository": {
     "type": "git",

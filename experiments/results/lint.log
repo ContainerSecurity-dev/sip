@@ -1,0 +1,5 @@
+
+> sip@1.0.0 lint
+> node experiments/scripts/check-syntax.mjs
+
+JavaScript and shell syntax checks passed (not a style linter).

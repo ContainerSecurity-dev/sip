@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-13",
+  "tests": 12,
+  "passed": 12,
+  "failed": 0,
+  "boundaries": [
+    {
+      "control": "recent-dependency",
+      "expected": "Reject four-day-old version",
+      "observed": "Rejected",
+      "outcome": "pass",
+      "evidence": "mocked registry"
+    },
+    {
+      "control": "lifecycle-script",
+      "expected": "No marker with ignore-scripts; marker with scripts enabled",
+      "observed": "Both observed",
+      "outcome": "pass",
+      "evidence": "real npm, local tarball"
+    },
+    {
+      "control": "tampered-lockfile",
+      "expected": "Reject mismatched URL/integrity",
+      "observed": "Rejected",
+      "outcome": "pass",
+      "evidence": "mocked registry and real npm"
+    },
+    {
+      "control": "missing-invalid-sbom",
+      "expected": "Fail retrieval or structural validation",
+      "observed": "Failed as expected",
+      "outcome": "pass",
+      "evidence": "mocked Docker"
+    },
+    {
+      "control": "fixable-critical",
+      "expected": "Release condition fails",
+      "observed": "Nonzero gate exit",
+      "outcome": "pass",
+      "evidence": "mocked Trivy result, real shell gate"
+    },
+    {
+      "control": "unapproved-ref",
+      "expected": "Reject ineligible branch/tag",
+      "observed": "Rejected before Docker invocation",
+      "outcome": "pass",
+      "evidence": "real shell policy"
+    },
+    {
+      "control": "digest-identity",
+      "expected": "Use verified digest and reject mismatch",
+      "observed": "Both observed",
+      "outcome": "pass",
+      "evidence": "mocked Docker; live promotion not measured"
+    },
+    {
+      "control": "sandbox-isolation",
+      "expected": "Runtime boundary isolation",
+      "observed": "Sandboxes unavailable",
+      "outcome": "not measured",
+      "evidence": "no runtime test"
+    }
+  ]
+}

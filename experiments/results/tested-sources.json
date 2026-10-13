@@ -1,0 +1,9 @@
+{
+  "src/index.ts": "ae974752ea23dd17905f5d5549cd9686de2d79d9a2c938259f6a573ad47c7955",
+  "package.json": "d715ce73890d5c4bb5b13d4cdca186b85d572febb9ead3d34a69b1a9650e8426",
+  "package-lock.json": "a43c797400c7b6fc1cdad29483c4ea453fd7cb5ba6fee8aaa48817b0be31e3ab",
+  "scripts/validate-lockfile-age.mjs": "c0be17c3b5c117d1296a35f50dee9326269aea77bdbcd09429af36625108946b",
+  "tests/app.test.mjs": "77bfd67f8874e70b3fb5b10af11ee5c9ffd19f0465b6789e2457e9f793aa3972",
+  "tests/security.test.mjs": "2a56b0eec55b4b41deacab563aa9041416bd26eedd11d51dace22e0c04e5c409",
+  "scripts/validate-lockfile-age.test.mjs": "abaabf5c8302c5ca6f39cf7612eb1abd620e97f2587ed5e6ee091434e273c875"
+}
